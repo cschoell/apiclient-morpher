@@ -1,18 +1,13 @@
 
 package org.cschoell.postman.model;
 
+import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Data;
 
 
 /**
@@ -103,7 +98,7 @@ public class Response {
     @JsonPropertyDescription("The numerical response code, example: 200, 201, 404, etc.")
     private Integer code;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
     /**
      * A unique, user defined identifier that can  be used to refer to this response from requests.
@@ -276,12 +271,12 @@ public class Response {
     }
 
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<String, AdditionalProperty> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
     @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
+    public void setAdditionalProperty(String name, AdditionalProperty value) {
         this.additionalProperties.put(name, value);
     }
 

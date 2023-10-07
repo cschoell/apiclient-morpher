@@ -1,18 +1,13 @@
 
 package org.cschoell.postman.model;
 
+import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Data;
 
 
 /**
@@ -94,7 +89,7 @@ public class Url {
     @JsonPropertyDescription("Postman supports path variables with the syntax `/path/:variableName/to/somewhere`. These variables are stored in this field.")
     private List<Variable> variable = new ArrayList<Variable>();
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
     /**
      * The string representation of the request URL, including the protocol, host, path, hash, query parameter(s) and path variable(s).
@@ -245,12 +240,12 @@ public class Url {
     }
 
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<String, AdditionalProperty> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
     @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
+    public void setAdditionalProperty(String name, AdditionalProperty value) {
         this.additionalProperties.put(name, value);
     }
 

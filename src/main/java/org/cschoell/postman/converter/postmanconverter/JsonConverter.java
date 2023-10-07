@@ -15,8 +15,7 @@ public class JsonConverter {
         JCodeModel codeModel = new JCodeModel();
         URL source = JsonConverter.class.getResource("/postmanschemaNoOneOf.json");
         GenerationConfig config = new DefaultGenerationConfig() {
-            @Override
-            public boolean isGenerateBuilders() { // set config option by overriding method
+            @Override public boolean isGenerateBuilders() { // set config option by overriding method
                 return false;
             }
 
@@ -31,6 +30,11 @@ public class JsonConverter {
             }
 
             @Override
+            public boolean isIncludeGeneratedAnnotation() {
+                return false;
+            }
+
+            @Override
             public Class<? extends Annotator> getCustomAnnotator() {
                 return LombokAnnotator.class;
             }
@@ -41,8 +45,11 @@ public class JsonConverter {
                 return SourceType.JSONSCHEMA;
             }
         };
+
+
+
         SchemaMapper mapper = new SchemaMapper(
-                new RuleFactory(config, new Jackson2Annotator(config), new SchemaStore()), new SchemaGenerator());
+                new RuleFactory(config, new CompositeAnnotator(new Jackson2Annotator(config), new LombokAnnotator()), new SchemaStore()), new SchemaGenerator());
         mapper.generate(codeModel, "Collection", "org.cschoell.postman.model", source);
         File file = Files.createTempDirectory("required").toFile();
         codeModel.build(file);

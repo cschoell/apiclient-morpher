@@ -1,18 +1,10 @@
 
 package org.cschoell.postman.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+
+import java.util.*;
 
 
 /**
@@ -71,8 +63,13 @@ public class Request {
     @JsonProperty("certificate")
     @JsonPropertyDescription("A representation of an ssl certificate")
     private Certificate certificate;
+    /**
+     * The Standard HTTP method associated with this request.
+     * 
+     */
     @JsonProperty("method")
-    private Object method;
+    @JsonPropertyDescription("The Standard HTTP method associated with this request.")
+    private Request.Method method;
     /**
      * Description
      * <p>
@@ -99,7 +96,7 @@ public class Request {
     @JsonPropertyDescription("This field contains the data usually contained in the request body.")
     private Body body;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
     /**
      * Url
@@ -189,13 +186,21 @@ public class Request {
         this.certificate = certificate;
     }
 
+    /**
+     * The Standard HTTP method associated with this request.
+     * 
+     */
     @JsonProperty("method")
-    public Object getMethod() {
+    public Request.Method getMethod() {
         return method;
     }
 
+    /**
+     * The Standard HTTP method associated with this request.
+     * 
+     */
     @JsonProperty("method")
-    public void setMethod(Object method) {
+    public void setMethod(Request.Method method) {
         this.method = method;
     }
 
@@ -262,13 +267,70 @@ public class Request {
     }
 
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<String, AdditionalProperty> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
     @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
+    public void setAdditionalProperty(String name, AdditionalProperty value) {
         this.additionalProperties.put(name, value);
+    }
+
+
+    /**
+     * The Standard HTTP method associated with this request.
+     * 
+     */
+    public enum Method {
+
+        GET("GET"),
+        PUT("PUT"),
+        POST("POST"),
+        PATCH("PATCH"),
+        DELETE("DELETE"),
+        COPY("COPY"),
+        HEAD("HEAD"),
+        OPTIONS("OPTIONS"),
+        LINK("LINK"),
+        UNLINK("UNLINK"),
+        PURGE("PURGE"),
+        LOCK("LOCK"),
+        UNLOCK("UNLOCK"),
+        PROPFIND("PROPFIND"),
+        VIEW("VIEW");
+        private final String value;
+        private final static Map<String, Request.Method> CONSTANTS = new HashMap<String, Request.Method>();
+
+        static {
+            for (Request.Method c: values()) {
+                CONSTANTS.put(c.value, c);
+            }
+        }
+
+        Method(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+
+        @JsonValue
+        public String value() {
+            return this.value;
+        }
+
+        @JsonCreator
+        public static Request.Method fromValue(String value) {
+            Request.Method constant = CONSTANTS.get(value);
+            if (constant == null) {
+                throw new IllegalArgumentException(value);
+            } else {
+                return constant;
+            }
+        }
+
     }
 
 }

@@ -1,20 +1,10 @@
 
 package org.cschoell.postman.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+
+import java.util.*;
 
 
 /**
@@ -67,7 +57,7 @@ public class Body {
     @JsonPropertyDescription("When set to true, prevents request body from being sent.")
     private Boolean disabled = false;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
     /**
      * Postman stores the type of data associated with this request in this field.
@@ -174,12 +164,12 @@ public class Body {
     }
 
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<String, AdditionalProperty> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
     @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
+    public void setAdditionalProperty(String name, AdditionalProperty value) {
         this.additionalProperties.put(name, value);
     }
 
@@ -190,11 +180,11 @@ public class Body {
      */
     public enum Mode {
 
-        raw("raw"),
-        urlencoded("urlencoded"),
-        formdata("formdata"),
-        file("file"),
-        graphql("graphql");
+        RAW("raw"),
+        URLENCODED("urlencoded"),
+        FORMDATA("formdata"),
+        FILE("file"),
+        GRAPHQL("graphql");
         private final String value;
         private final static Map<String, Body.Mode> CONSTANTS = new HashMap<String, Body.Mode>();
 
@@ -204,7 +194,7 @@ public class Body {
             }
         }
 
-        private Mode(String value) {
+        Mode(String value) {
             this.value = value;
         }
 

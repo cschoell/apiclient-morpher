@@ -1,6 +1,5 @@
 package org.cschoell.bruno;
 
-import org.cschoell.postman.model.Item;
 import org.cschoell.postman.model.PostmanCollection;
 
 import java.io.File;
@@ -11,7 +10,7 @@ public class BrunoCollectionWriter {
         if (targetPath.exists()) {
             targetPath.mkdirs();
         }
-        collection.getItem().forEach(item -> {
+        collection.getRequestItem().forEach(item -> {
 //            String fileContent = createRequestConfig(item);
 
             final String name = item.getName();

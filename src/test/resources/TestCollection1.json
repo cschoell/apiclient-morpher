@@ -120,14 +120,95 @@
           ]
         },
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Access-Control-Allow-Credentials",
+            "value": "",
+            "name": "Access-Control-Allow-Credentials",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "",
+            "name": "Access-Control-Allow-Headers",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "",
+            "name": "Access-Control-Allow-Methods",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "",
+            "name": "Access-Control-Allow-Origin",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Expose-Headers",
+            "value": "",
+            "name": "Access-Control-Expose-Headers",
+            "description": ""
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive",
+            "name": "Connection",
+            "description": ""
+          },
+          {
+            "key": "Content-Length",
+            "value": "15",
+            "name": "Content-Length",
+            "description": ""
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json; charset=utf-8",
+            "name": "Content-Type",
+            "description": ""
+          },
+          {
+            "key": "Date",
+            "value": "Wed, 11 Jan 2017 10:27:53 GMT",
+            "name": "Date",
+            "description": ""
+          },
+          {
+            "key": "ETag",
+            "value": "W/\"f-/i9mO/upK91ZtL0BkKFGtw\"",
+            "name": "ETag",
+            "description": ""
+          },
+          {
+            "key": "Server",
+            "value": "nginx/1.10.1",
+            "name": "Server",
+            "description": ""
+          },
+          {
+            "key": "Vary",
+            "value": "Accept-Encoding",
+            "name": "Vary",
+            "description": ""
+          },
+          {
+            "key": "set-cookie",
+            "value": "sails.sid=s%3ATNJaNxi2QCv4RPBb64sIZxQGN1h6IP3g.9sQVAijlsLsh0r7LgffxXa9k2we6UumPEVv%2Bsk4woLI; Path=/; HttpOnly",
+            "name": "set-cookie",
+            "description": ""
+          }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\r\n  \"person\": {\r\n    \"firstname\": \"Max\",\r\n    \"surname\": \"Muster\"\r\n  },\r\n   \"record\": {\r\n    \"ticket\": \"12345423\",\r\n    \"orderId\": \"T1235\"\r\n  },\r\n  \"result\": {\r\n    \"x\": \"\",\r\n    \"date\": \"2018-9-09T07:00:39.409Z\",\r\n    \"reportId\": \"1234\"  }\r\n}",
           "options": {
             "raw": {
               "language": "json"
-            }
+            },
+            "raw2": "json"
+
           }
         },
         "url": {
@@ -141,6 +222,12 @@
           "path": [
             "personbackend",
             "sendResult"
+          ],
+          "query": [
+            {
+              "key": "timestamp",
+              "value": "2016-10-10"
+            }
           ]
         }
       },

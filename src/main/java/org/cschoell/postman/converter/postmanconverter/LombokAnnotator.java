@@ -10,6 +10,12 @@ public class LombokAnnotator extends AbstractAnnotator {
     @Override
     public void typeInfo(JDefinedClass clazz, JsonNode schema) {
         super.typeInfo(clazz, schema);
+
+    }
+
+    @Override
+    public void propertyOrder(JDefinedClass clazz, JsonNode propertiesNode) {
+        super.propertyOrder(clazz, propertiesNode);
         clazz.annotate(Data.class);
     }
 }
