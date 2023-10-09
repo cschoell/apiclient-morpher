@@ -232,6 +232,41 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Graphql Request",
+      "id": "078883ea-ac9e-842e-8f41-784b59a33722",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+              "query" : "query ($organization: String!) {\n  organization(login: $organization) {\n    name\n    url\n  }\n}",
+              "variables" : "{\n  \"organization\": \"the-road-to-learn-react\"\n}"
+
+          }
+        },
+        "url": {
+          "raw": "https://postman-echo.com/graphql",
+          "protocol": "https",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "get"
+          ],
+          "query": [
+            {
+              "key": "test",
+              "value": "123"
+            }
+          ]
+        },
+        "description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+      },
+      "response": []
     }
   ],
   "auth": {

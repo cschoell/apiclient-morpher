@@ -14,6 +14,9 @@ import java.util.Map;
 @Data
 public class Graphql {
 
+    String query;
+    String variables;
+
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 

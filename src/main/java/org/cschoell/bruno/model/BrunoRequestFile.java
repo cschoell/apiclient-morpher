@@ -2,6 +2,7 @@ package org.cschoell.bruno.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 @JsonPropertyOrder({
@@ -10,7 +11,13 @@ import lombok.Data;
         "query",
         "headers",
         "auth",
-        "body",
+        "jsonBody",
+        "textBody",
+        "xmlBody",
+        "urlEncodedBody",
+        "multipartFormBody",
+        "graphqlBody",
+        "graphqlVarsBody",
         "preRequestVars",
         "postResponseVars",
         "asserts",
@@ -30,7 +37,13 @@ public class BrunoRequestFile {
 
     private Auth auth;
 
-    private Body body;
+    private RawBody jsonBody;
+    private RawBody textBody;
+    private RawBody xmlBody;
+    private FormBody urlEncodedBody;
+    private FormBody multipartFormBody;
+    private RawBody graphqlBody;
+    private RawBody graphqlVarsBody;
 
     private PreRequestVars preRequestVars;
 
@@ -43,4 +56,38 @@ public class BrunoRequestFile {
     private PostResponseScript postResponseScript;
 
     private Tests tests;
+
+    public void setGraphqlBody(RawBody body) {
+        this.graphqlBody = onlyWithContent(body, BodyType.graphql);
+    }
+
+    public void setGraphqlVarsBody(RawBody body) {
+        this.graphqlVarsBody = onlyWithContent(body, BodyType.graphql_vars);
+    }
+
+    public void setJsonBody(RawBody body) {
+        this.jsonBody = onlyWithContent(body, BodyType.json);
+    }
+
+    public void setTextBody(RawBody body) {
+        this.textBody = onlyWithContent(body, BodyType.text);
+    }
+
+    public void setXmlBody(RawBody body) {
+        this.xmlBody = onlyWithContent(body, BodyType.xml);
+    }
+
+    public void setUrlEncodedBody(FormBody body) {
+        this.urlEncodedBody = onlyWithContent(body, BodyType.urlEncoded);
+    }
+
+    public void setMultipartFormBody(FormBody body) {
+        this.multipartFormBody = onlyWithContent(body, BodyType.multipartForm);
+    }
+
+    private <T extends Body> T onlyWithContent(T body, BodyType bodyType) {
+        if (body == null || !body.hasContent()) return null;
+        body.setType(bodyType);
+        return body;
+    }
 }

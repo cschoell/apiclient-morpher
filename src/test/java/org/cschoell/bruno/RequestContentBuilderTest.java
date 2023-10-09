@@ -12,13 +12,24 @@ class RequestContentBuilderTest {
     private TestCollectionProvider testCollectionProvider = new TestCollectionProvider();
 
     @Test
-    void name() {
-        final PostmanCollection collection = testCollectionProvider.getCollection();
+    void runPostmanEcho() {
+        final PostmanCollection collection = testCollectionProvider.getCollection(TestCollectionProvider.TestCollectionFile.postmanecho);
+        runCollection(collection);
+
+    }
+
+    @Test
+    void runTestCollection1() {
+        final PostmanCollection collection = testCollectionProvider.getCollection(TestCollectionProvider.TestCollectionFile.testcollection1);
+        runCollection(collection);
+
+    }
+
+    private void runCollection(PostmanCollection collection) {
         final BrunoCollection brunoCollection = mapper.toBrunoCollection(collection);
         brunoCollection.getRequests().forEach(brunoRequestFile -> {
             mapItem(new RequestContentBuilder(brunoRequestFile));
         });
-
     }
 
     private void mapItem(RequestContentBuilder builder) {

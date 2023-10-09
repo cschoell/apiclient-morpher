@@ -1,16 +1,9 @@
 package org.cschoell.bruno.model;
 
-import lombok.Data;
+public interface Body extends BrunoModelComponentRoot{
 
-@Data
-public class Body extends BrunoValueBase {
+    BodyType getType();
+    void setType(BodyType bodyType);
 
-    private BodyType type;
-
-    @Override
-    public String getComponentRootName() {
-        return type == BodyType.none ? "body" : "body:" + type.inBrunoStyle();
-    }
-
-
+    boolean hasContent();
 }

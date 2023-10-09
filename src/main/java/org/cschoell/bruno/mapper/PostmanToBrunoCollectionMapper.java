@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.cschoell.postman.model.Body.Mode.RAW;
+import static org.cschoell.postman.model.Body.Mode.*;
 
 @Mapper()
 public interface PostmanToBrunoCollectionMapper {
@@ -55,26 +55,62 @@ public interface PostmanToBrunoCollectionMapper {
     @Mapping(target = "request.auth", source = "request.auth.type")
     @Mapping(target = "request.body", source = "request.body.mode")
     @Mapping(target = "auth", source = "request.auth")
-    @Mapping(target = "body.value", source = "request.body.raw")
-    @Mapping(target = "body.type", source = "request.body.mode")
+    @Mapping(target = "urlEncodedBody", source = "request.body.urlencoded")
+    @Mapping(target = "multipartFormBody", source = "request.body.formdata")
+    @Mapping(target = "textBody", source = "request.body.raw")
+    @Mapping(target = "graphqlBody.value", source = "request.body.graphql.query")
+    @Mapping(target = "graphqlVarsBody.value", source = "request.body.graphql.variables")
     BrunoRequestFile toBrunoRequestFile(Item item);
 
     @AfterMapping
     default void afterToBrunoRequestFile(@MappingTarget BrunoRequestFile brunoRequestFile, Item item) {
-        if (Objects.equals(BodyType.none, brunoRequestFile.getBody().getType()) && StringUtils.isBlank(brunoRequestFile.getBody().getValue())) {
-            brunoRequestFile.setBody(null);
-        }
         if (brunoRequestFile.getAuth() == null) {
             brunoRequestFile.getRequest().setAuth("none");
         }
         handleEvents(brunoRequestFile, item);
-        if (item.getRequest().getBody().getMode() == RAW) {
-            BodyType type = mapBodyLanguage(item.getRequest().getBody().getAdditionalProperties());
+        final Body.Mode mode = item.getRequest().getBody().getMode();
+        BodyType type = toBodyType(mode);
+        if (mode == RAW) {
+            type = mapBodyLanguage(item.getRequest().getBody().getAdditionalProperties());
             type = mapBodyLanguageViaHeader(type, item.getRequest().getHeader());
-            brunoRequestFile.getBody().setType(type);
-            brunoRequestFile.getRequest().setBody(type);
+
+            final RawBody textBody = brunoRequestFile.getTextBody();
+            if (textBody != null && type != BodyType.text) {
+                brunoRequestFile.setTextBody(null);
+                textBody.setType(type);
+                switch (type) {
+                    case json -> brunoRequestFile.setJsonBody(textBody);
+                    case xml -> brunoRequestFile.setXmlBody(textBody);
+                }
+            }
+
+            //when both graphql and graphql vars is set a query with variables existed, so we only need the graphqlVars
+            //assuming that's how the graphqlvars is supposed to work in bruno
+            if (brunoRequestFile.getGraphqlBody() != null && brunoRequestFile.getGraphqlVarsBody() != null) brunoRequestFile.setGraphqlBody(null);
         }
+        brunoRequestFile.getRequest().setBody(type);
     }
+
+    default FormBody mapUrlEncoded(List<Urlencoded> list) {
+        if (list.isEmpty()) return null;
+        FormBody body = new FormBody();
+        list.forEach(encoded -> body.put(encoded.getKey(), encoded.getValue()));
+        return body;
+    }
+
+    default FormBody formdataToFormBody(List<Formdatum> formdata) {
+        if (formdata.isEmpty()) return null;
+        final FormBody formBody = new FormBody();
+        formdata.forEach(fd -> {
+            formBody.put(fd.getKey(), fd.getValue());
+        });
+        return formBody;
+    }
+
+    @Mapping(target = "value", source = "value")
+    @Mapping(target = "type", constant = "text")
+    RawBody mapRawBody(String value);
+
 
 
     default void handleEvents(BrunoRequestFile brunoRequestFile, Item item) {

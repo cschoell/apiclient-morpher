@@ -11,9 +11,19 @@ public class TestCollectionProvider {
 
     private final JsonMapper objectMapper = new PostmanObjectMapperBuilder().build();
 
+    public static enum TestCollectionFile {
+        postmanecho("/postmanecho.json"),
+        testcollection1("/TestCollection1.json");
+        String file;
 
-    public PostmanCollection getCollection() {
-        final URL resource = TestCollectionProvider.class.getResource("/postmanecho.json");
+        TestCollectionFile(String file) {
+            this.file = file;
+        }
+    }
+
+
+    public PostmanCollection getCollection(TestCollectionFile collection) {
+        final URL resource = TestCollectionProvider.class.getResource(collection.file);
         try {
             return objectMapper.readValue(resource, PostmanCollection.class);
         } catch (IOException e) {

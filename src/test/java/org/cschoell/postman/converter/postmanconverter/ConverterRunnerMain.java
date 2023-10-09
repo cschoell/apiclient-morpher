@@ -25,7 +25,7 @@ class ConverterRunnerMain {
     }
 
     private void run() {
-        final PostmanCollection collection = testCollectionProvider.getCollection();
+        final PostmanCollection collection = testCollectionProvider.getCollection(TestCollectionProvider.TestCollectionFile.testcollection1);
         final BrunoCollection brunoCollection = mapper.toBrunoCollection(collection);
 
         brunoCollection.getRequests().forEach(brunoRequestFile -> {
