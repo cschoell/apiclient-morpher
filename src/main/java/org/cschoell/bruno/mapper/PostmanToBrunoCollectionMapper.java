@@ -18,19 +18,23 @@ import static org.cschoell.postman.model.Body.Mode.*;
 @Mapper()
 public interface PostmanToBrunoCollectionMapper {
 
-    PostmanToBrunoCollectionMapper INSTANCE = Mappers.getMapper( PostmanToBrunoCollectionMapper.class );
+    PostmanToBrunoCollectionMapper INSTANCE = Mappers.getMapper(PostmanToBrunoCollectionMapper.class);
 
     @Mapping(target = "requests", source = "item", qualifiedByName = "item")
+    @Mapping(target = "folders", source = "item", qualifiedByName = "item")
     BrunoCollection toBrunoCollection(PostmanCollection in);
+
 
     @AfterMapping
     @Named("item")
-    default List<BrunoRequestFile> afterRequestsMapping(List<PostmanPolymorphicBase> polymorphicBases, @MappingTarget List<BrunoRequestFile> brunoRequestFiles) {
-        final List<Folder> folders = polymorphicBases.stream().filter(postmanPolymorphicBase -> postmanPolymorphicBase instanceof Folder).map(postmanPolymorphicBase -> (Folder) postmanPolymorphicBase).toList();
-        for (Folder folder : folders) {
-            brunoRequestFiles.addAll(folder.getItem().stream().map(this::toBrunoRequestFile).toList());
-        }
+    default List<BrunoRequestFile> afterRequestsMapping(@MappingTarget List<BrunoRequestFile> brunoRequestFiles) {
         return brunoRequestFiles.stream().filter(Objects::nonNull).toList();
+    }
+
+    @AfterMapping
+    @Named("item")
+    default List<Folder> afterFolderMapping(@MappingTarget List<Folder> folders) {
+        return folders.stream().filter(Objects::nonNull).toList();
     }
 
     @Named("item")
@@ -38,13 +42,20 @@ public interface PostmanToBrunoCollectionMapper {
         if (fromPoly instanceof Item) {
             return toBrunoRequestFile((Item) fromPoly);
         }
-        return toBrunoRequestFolderFile(fromPoly);
+        return null;
     }
-    default BrunoRequestFile toBrunoRequestFolderFile(PostmanPolymorphicBase fromPoly) {
-        if (fromPoly instanceof Folder) {
-            ((Folder) fromPoly).getItem().forEach(item -> {
-                final BrunoRequestFile brunoRequestFolderFile = toBrunoRequestFolderFile(item);
+
+    @Named("item")
+    default Folder toBrunoRequestFolder(PostmanPolymorphicBase fromPoly) {
+        if (fromPoly instanceof VirtualFolder) {
+            final Folder folder = new Folder(((VirtualFolder) fromPoly).getName());
+            ((VirtualFolder) fromPoly).getItem().forEach(item -> {
+                final BrunoRequestFile brunoRequestFile = toBrunoRequestFile(item);
+                if (brunoRequestFile != null) folder.getRequests().add(brunoRequestFile);
+                final Folder folder1 = toBrunoRequestFolder(item);
+                if (folder1 != null) folder.getSubFolder().add(folder1);
             });
+            return folder;
         }
         return null;
     }
@@ -52,7 +63,7 @@ public interface PostmanToBrunoCollectionMapper {
     @Mapping(target = "query", source = "request.url.query")
     @Mapping(target = "meta", source = "item")
     @Mapping(target = "headers", source = "request.header")
-    @Mapping(target = "request.auth", source = "request.auth.type")
+    @Mapping(target = "request.authString", source = "request.auth.type")
     @Mapping(target = "request.body", source = "request.body.mode")
     @Mapping(target = "auth", source = "request.auth")
     @Mapping(target = "urlEncodedBody", source = "request.body.urlencoded")
@@ -62,10 +73,16 @@ public interface PostmanToBrunoCollectionMapper {
     @Mapping(target = "graphqlVarsBody.value", source = "request.body.graphql.variables")
     BrunoRequestFile toBrunoRequestFile(Item item);
 
+    default AuthType mapAuthToType(Auth value) {
+        return value != null ? value.getType() : AuthType.none;
+    }
+
     @AfterMapping
     default void afterToBrunoRequestFile(@MappingTarget BrunoRequestFile brunoRequestFile, Item item) {
         if (brunoRequestFile.getAuth() == null) {
-            brunoRequestFile.getRequest().setAuth("none");
+            brunoRequestFile.getRequest().setAuth(AuthType.none);
+        } else {
+            brunoRequestFile.getRequest().setAuth(brunoRequestFile.getAuth().getType());
         }
         handleEvents(brunoRequestFile, item);
         final Body.Mode mode = item.getRequest().getBody().getMode();
@@ -86,7 +103,8 @@ public interface PostmanToBrunoCollectionMapper {
 
             //when both graphql and graphql vars is set a query with variables existed, so we only need the graphqlVars
             //assuming that's how the graphqlvars is supposed to work in bruno
-            if (brunoRequestFile.getGraphqlBody() != null && brunoRequestFile.getGraphqlVarsBody() != null) brunoRequestFile.setGraphqlBody(null);
+            if (brunoRequestFile.getGraphqlBody() != null && brunoRequestFile.getGraphqlVarsBody() != null)
+                brunoRequestFile.setGraphqlBody(null);
         }
         brunoRequestFile.getRequest().setBody(type);
     }
@@ -112,24 +130,23 @@ public interface PostmanToBrunoCollectionMapper {
     RawBody mapRawBody(String value);
 
 
-
     default void handleEvents(BrunoRequestFile brunoRequestFile, Item item) {
         final List<Event> events = item.getEvent();
         for (Event event : events) {
             switch (event.getListen()) {
-                case "test" : {
+                case "test": {
                     final Tests tests = new Tests();
                     tests.setValue(StringUtils.join(event.getScript().getExec(), "\n"));
                     brunoRequestFile.setTests(tests);
                     break;
                 }
-                case "prerequest" : {
+                case "prerequest": {
                     final PreRequestScript value = new PreRequestScript();
                     value.setValue(StringUtils.join(event.getScript().getExec(), "\n"));
                     brunoRequestFile.setPreRequestScript(value);
                     break;
                 }
-                case "postresponse" : {
+                case "postresponse": {
                     final PostResponseScript value = new PostResponseScript();
                     value.setValue(StringUtils.join(event.getScript().getExec(), "\n"));
                     brunoRequestFile.setPostResponseScript(value);
@@ -173,12 +190,13 @@ public interface PostmanToBrunoCollectionMapper {
     default void mapAuthAttributes(@MappingTarget Auth auth, List<AuthAttribute> authAttributes) {
         authAttributes.forEach(authAttribute -> mapAuthAttribute(auth, authAttribute));
     }
+
     default void mapAuthAttribute(@MappingTarget Auth auth, AuthAttribute authAttribute) {
         auth.put(authAttribute.getKey(), authAttribute.getValue());
     }
 
     @Named("language")
-    default BodyType mapBodyLanguage(Map<String,AdditionalProperty> value) {
+    default BodyType mapBodyLanguage(Map<String, AdditionalProperty> value) {
         if (value == null) return BodyType.text;
         final AdditionalProperty raw = value.get("raw");
         if (raw == null) return BodyType.text;
@@ -188,9 +206,9 @@ public interface PostmanToBrunoCollectionMapper {
 
     default BodyType mapBodyLanguageViaHeader(BodyType currentType, List<Header> headers) {
         String contentHeader = headers.stream().filter(header -> StringUtils.equalsIgnoreCase(header.getKey(), "content-type")).map(Header::getValue).findFirst().orElse(null);
-        if(StringUtils.contains(contentHeader, "json")) return BodyType.json;
-        if(StringUtils.contains(contentHeader, "xml")) return BodyType.xml;
-        if(StringUtils.contains(contentHeader, "text")) return BodyType.text;
+        if (StringUtils.contains(contentHeader, "json")) return BodyType.json;
+        if (StringUtils.contains(contentHeader, "xml")) return BodyType.xml;
+        if (StringUtils.contains(contentHeader, "text")) return BodyType.text;
         return currentType;
     }
 
@@ -200,9 +218,10 @@ public interface PostmanToBrunoCollectionMapper {
             case RAW -> BodyType.text;
             case GRAPHQL -> BodyType.graphql;
             case FORMDATA -> BodyType.multipartForm;
-            case URLENCODED -> BodyType.urlEncoded;
+            case URLENCODED -> BodyType.formUrlencoded;
         };
     }
+
     default BodyType toBodyType(String language) {
         return switch (language) {
             case "xml" -> BodyType.xml;

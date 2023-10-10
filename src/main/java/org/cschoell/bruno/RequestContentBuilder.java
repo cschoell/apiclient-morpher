@@ -35,7 +35,7 @@ public class RequestContentBuilder {
             for (PropertyDescriptor propertyDescriptor : rootDescriptors) {
                 if (BrunoModelComponentRoot.class.isAssignableFrom(propertyDescriptor.getPropertyType())) {
                     final BrunoModelComponentRoot rootProp = (BrunoModelComponentRoot) PropertyUtils.getProperty(brunoRequestFile, propertyDescriptor.getName());
-                    if (rootProp == null) continue;
+                    if (rootProp == null || rootProp.hidden()) continue;
                     startSection(rootProp.getComponentRootName());
                     if (rootProp instanceof Map<?, ?>) {
                         Map<String, String> mapBean = (Map) rootProp;

@@ -83,15 +83,15 @@ public class PostmanCollection {
         return item.stream().map(this::mapItem).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    public List<Folder> getFolder() {
+    public List<VirtualFolder> getFolder() {
         return item.stream().map(this::mapFolder).filter(Objects::nonNull).collect(Collectors.toList());
     }
     private Item mapItem(PostmanPolymorphicBase itemBase) {
         return itemBase instanceof Item ? (Item) itemBase : null;
     }
 
-    private Folder mapFolder(PostmanPolymorphicBase itemBase) {
-        return itemBase instanceof Folder ? (Folder) itemBase : null;
+    private VirtualFolder mapFolder(PostmanPolymorphicBase itemBase) {
+        return itemBase instanceof VirtualFolder ? (VirtualFolder) itemBase : null;
     }
 
     @JsonAnyGetter

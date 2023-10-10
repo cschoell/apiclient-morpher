@@ -20,7 +20,7 @@ import java.util.List;
         "protocolProfileBehavior"
 })
 @Data
-public class Folder extends ItemBase {
+public class VirtualFolder extends ItemBase {
 
     @JsonProperty("item")
     private List<Item> item;

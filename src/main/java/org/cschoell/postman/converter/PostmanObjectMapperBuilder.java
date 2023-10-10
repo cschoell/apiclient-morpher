@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.cschoell.postman.model.Folder;
+import org.cschoell.postman.model.VirtualFolder;
 import org.cschoell.postman.model.Item;
 import org.cschoell.postman.model.PostmanPolymorphicBase;
 
@@ -23,7 +23,7 @@ public class PostmanObjectMapperBuilder {
     public JsonMapper build() {
         PolymorphicDeserializer deserializer =
                 new PolymorphicDeserializer();
-        deserializer.registerItem("item", Folder.class);
+        deserializer.registerItem("item", VirtualFolder.class);
         deserializer.registerItem("request", Item.class);
         SimpleModule module =
                 new SimpleModule("PolymorphicItemDeserializerModule",

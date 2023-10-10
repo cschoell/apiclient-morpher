@@ -10,7 +10,7 @@ public enum BodyType {
     json(BodyMode.raw),
     text(BodyMode.raw),
     xml(BodyMode.raw),
-    urlEncoded(BodyMode.form),
+    formUrlencoded(BodyMode.form),
     multipartForm(BodyMode.form),
     graphql(BodyMode.raw),
     graphql_vars(BodyMode.raw);

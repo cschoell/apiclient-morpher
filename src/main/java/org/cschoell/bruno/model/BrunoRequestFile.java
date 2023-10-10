@@ -2,7 +2,6 @@ package org.cschoell.bruno.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 @JsonPropertyOrder({
@@ -78,7 +77,7 @@ public class BrunoRequestFile {
     }
 
     public void setUrlEncodedBody(FormBody body) {
-        this.urlEncodedBody = onlyWithContent(body, BodyType.urlEncoded);
+        this.urlEncodedBody = onlyWithContent(body, BodyType.formUrlencoded);
     }
 
     public void setMultipartFormBody(FormBody body) {

@@ -9,4 +9,8 @@ import java.util.LinkedHashMap;
 @Data
 public class Query extends LinkedHashMap<String, String> implements BrunoModelComponentRoot {
 
+    @Override
+    public boolean hidden() {
+        return isEmpty();
+    }
 }

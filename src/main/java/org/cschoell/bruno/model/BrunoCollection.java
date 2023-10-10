@@ -7,7 +7,8 @@ import java.util.List;
 
 @Data
 public class BrunoCollection {
-
     private List<BrunoRequestFile> requests = new ArrayList<>();
+
+    private List<Folder> folders = new ArrayList<>();
 
 }

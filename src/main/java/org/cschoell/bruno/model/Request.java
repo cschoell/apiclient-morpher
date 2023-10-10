@@ -16,13 +16,12 @@ public class Request extends BrunoModelBase {
     private String method;
     private String url;
     private BodyType body;
-    private String auth;
+    private AuthType auth;
 
     @Override
     public String getComponentRootName() {
         return StringUtils.lowerCase(getMethod());
     }
-
     @JsonIgnore
     public String getMethod() {
         return method;
@@ -33,7 +32,15 @@ public class Request extends BrunoModelBase {
         this.method = StringUtils.lowerCase(method);
     }
 
-    public void setAuth(String auth) {
-        this.auth = StringUtils.lowerCase(auth);
+    public void setAuthString(String auth) {
+        try {
+            this.auth = AuthType.valueOf(auth);
+        } catch (IllegalArgumentException e) {
+            this.auth = AuthType.none;
+        }
+    }
+
+    public void setAuth(AuthType auth) {
+        this.auth = auth;
     }
 }

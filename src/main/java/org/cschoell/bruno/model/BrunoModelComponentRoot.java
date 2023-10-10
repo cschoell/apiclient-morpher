@@ -6,4 +6,8 @@ public interface BrunoModelComponentRoot {
     default String getComponentRootName()  {
         return StringUtils.lowerCase(getClass().getSimpleName());
     }
+
+    default boolean hidden() {
+        return false;
+    }
 }

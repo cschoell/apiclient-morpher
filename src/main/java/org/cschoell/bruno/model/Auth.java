@@ -13,9 +13,18 @@ public class Auth extends LinkedHashMap<String, String> implements BrunoModelCom
         return "auth:" + type;
     }
 
-    private String type;
+    private AuthType type;
+
+    @Override
+    public boolean hidden() {
+        return type == AuthType.none;
+    }
 
     public void setType(String type) {
-        this.type = StringUtils.lowerCase(type);
+        try {
+            this.type = AuthType.valueOf(StringUtils.lowerCase(type));
+        } catch (IllegalArgumentException e) {
+            this.type = AuthType.none;
+        }
     }
 }
