@@ -18,7 +18,7 @@ public class Folder {
     }
 
     public String getFolderName() {
-        return FileSystem.getCurrent().toLegalFileName(name, '_');
+        return org.apache.commons.io.FileSystem.getCurrent().toLegalFileName(name, '_');
     }
 
     List<BrunoRequestFile> requests = new LinkedList<>();

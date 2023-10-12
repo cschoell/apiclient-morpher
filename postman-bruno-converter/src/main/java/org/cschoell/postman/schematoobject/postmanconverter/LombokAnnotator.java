@@ -1,4 +1,4 @@
-package org.cschoell.postman.converter.postmanconverter;
+package org.cschoell.postman.schematoobject.postmanconverter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.codemodel.JDefinedClass;

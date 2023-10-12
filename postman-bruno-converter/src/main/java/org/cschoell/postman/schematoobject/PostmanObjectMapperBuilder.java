@@ -1,4 +1,4 @@
-package org.cschoell.postman.converter;
+package org.cschoell.postman.schematoobject;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;

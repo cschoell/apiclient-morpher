@@ -1,0 +1,1 @@
+Helper package to convert a postman collection json schema into Java Mappable Json Objects.

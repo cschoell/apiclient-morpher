@@ -1,4 +1,4 @@
-package org.cschoell.postman.converter.postmanconverter;
+package org.cschoell.postman.schematoobject.postmanconverter;
 
 import com.sun.codemodel.JCodeModel;
 import org.jsonschema2pojo.*;

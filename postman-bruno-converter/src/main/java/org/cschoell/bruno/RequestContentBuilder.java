@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RequestContentBuilder {
-    public static final String DEFAULT_BODY_JSON = "json";
     BrunoRequestFile brunoRequestFile;
     StringBuilder content = new StringBuilder();
 
@@ -78,17 +77,7 @@ public class RequestContentBuilder {
             }
             return sorted;
         }
-        return Arrays.asList(PropertyUtils.getPropertyDescriptors(clazz)).stream().filter(propertyDescriptor -> !propertyDescriptor.getReadMethod().isAnnotationPresent(JsonIgnore.class)).toList();
-    }
-
-    private String getComponentName(PropertyDescriptor propertyDescriptor, Map<String, String> mapBean) throws IllegalAccessException, InvocationTargetException {
-        String componentName = propertyDescriptor.getName().toLowerCase();
-        try {
-            componentName = (String) PropertyUtils.getProperty(mapBean, "componentRootName");
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-        return componentName;
+        return Arrays.stream(PropertyUtils.getPropertyDescriptors(clazz)).filter(propertyDescriptor -> !propertyDescriptor.getReadMethod().isAnnotationPresent(JsonIgnore.class)).toList();
     }
 
 

@@ -1,7 +1,7 @@
 package org.cschoell.testsupport;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import org.cschoell.postman.converter.PostmanObjectMapperBuilder;
+import org.cschoell.postman.schematoobject.PostmanObjectMapperBuilder;
 import org.cschoell.postman.model.PostmanCollection;
 
 import java.io.IOException;
