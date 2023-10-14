@@ -8,6 +8,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Data
 public class Assert extends BrunoValueBase {
-    private String type;
-
+    @Override
+    public String getComponentRootName() {
+        return "assert";
+    }
 }

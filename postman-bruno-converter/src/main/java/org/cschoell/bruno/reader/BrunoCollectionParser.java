@@ -58,7 +58,7 @@ public class BrunoCollectionParser {
         ID_TO_TARGETCLASS.put("body:graphql:vars", new RawBodyMapper(BrunoRequestFile::setGraphqlVarsBody));
         ID_TO_TARGETCLASS.put(PreRequestVars.NAME, new GeneralMapper<>(PreRequestVars.class, BrunoRequestFile::setPreRequestVars));
         ID_TO_TARGETCLASS.put(PostResponseVars.NAME, new GeneralMapper<>(PostResponseVars.class, BrunoRequestFile::setPostResponseVars));
-        ID_TO_TARGETCLASS.put("assert", new GeneralMapper<>(Assert.class, BrunoRequestFile::setAnAssert));
+        ID_TO_TARGETCLASS.put("assert", new GeneralMapper<>(Assert.class, BrunoRequestFile::setAsserts));
         ID_TO_TARGETCLASS.put(PreRequestScript.NAME, new GeneralMapper<>(PreRequestScript.class, BrunoRequestFile::setPreRequestScript));
         ID_TO_TARGETCLASS.put(PostResponseScript.NAME, new GeneralMapper<>(PostResponseScript.class, BrunoRequestFile::setPostResponseScript));
     }

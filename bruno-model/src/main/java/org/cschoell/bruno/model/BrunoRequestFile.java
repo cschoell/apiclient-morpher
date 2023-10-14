@@ -1,5 +1,6 @@
 package org.cschoell.bruno.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
@@ -19,7 +20,7 @@ import lombok.Data;
         "graphqlVarsBody",
         "preRequestVars",
         "postResponseVars",
-        "assert",
+        "asserts",
         "preRequestScript",
         "postResponseScript",
         "tests"
@@ -48,7 +49,8 @@ public class BrunoRequestFile {
 
     private PostResponseVars postResponseVars;
 
-    private Assert anAssert;
+    @JsonProperty(value = "assert")
+    private Assert asserts;
 
     private PreRequestScript preRequestScript;
 
