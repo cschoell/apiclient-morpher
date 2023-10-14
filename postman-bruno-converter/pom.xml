@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>org.cschoell.apiclient.converter</groupId>
+            <artifactId>apiclient-converter-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cschoell.apiclient.converter</groupId>
             <artifactId>postman-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -41,6 +46,10 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jsonschema2pojo</groupId>
@@ -71,6 +80,11 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

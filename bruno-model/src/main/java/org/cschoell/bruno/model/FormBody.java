@@ -1,10 +1,7 @@
 package org.cschoell.bruno.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.LinkedHashMap;
 
@@ -12,6 +9,7 @@ import java.util.LinkedHashMap;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(callSuper = true)
 public class FormBody extends LinkedHashMap<String, String> implements Body {
 
     private BodyType type;

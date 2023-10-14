@@ -1,4 +1,4 @@
-package org.cschoell.bruno.mapper;
+package org.cschoell.convert.mapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cschoell.bruno.model.Auth;
@@ -20,6 +20,7 @@ public interface PostmanToBrunoCollectionMapper {
 
     PostmanToBrunoCollectionMapper INSTANCE = Mappers.getMapper(PostmanToBrunoCollectionMapper.class);
 
+    @Mapping(target = "meta.name", source = "info.name")
     @Mapping(target = "requests", source = "item", qualifiedByName = "item")
     @Mapping(target = "folders", source = "item", qualifiedByName = "item")
     BrunoCollection toBrunoCollection(PostmanCollection in);

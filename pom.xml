@@ -19,6 +19,10 @@
         <java.version>17</java.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <commons-io.version>2.14.0</commons-io.version>
+        <picocli.version>4.7.5</picocli.version>
+        <jsonschema2pojo-core.version>1.2.1</jsonschema2pojo-core.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
     </properties>
 
     <dependencyManagement>
@@ -34,19 +38,24 @@
                 <version>${commons-io.version}</version>
             </dependency>
             <dependency>
+                <groupId>info.picocli</groupId>
+                <artifactId>picocli</artifactId>
+                <version>${picocli.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.jsonschema2pojo</groupId>
                 <artifactId>jsonschema2pojo-core</artifactId>
-                <version>1.2.1</version>
+                <version>${jsonschema2pojo-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>4.4</version>
+                <version>${commons-collections4.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.9.4</version>
+                <version>${commons-beanutils.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-collections</groupId>
@@ -85,9 +94,12 @@
     </build>
 
     <modules>
+        <module>apiclient-converter-api</module>
         <module>bruno-model</module>
         <module>postman-model</module>
+        <module>postman-model-fromschema-generator</module>
         <module>postman-bruno-converter</module>
+        <module>apiclient-model-converter-cli</module>
     </modules>
 
 </project>

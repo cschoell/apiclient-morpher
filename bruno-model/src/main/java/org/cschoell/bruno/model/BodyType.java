@@ -32,7 +32,7 @@ public enum BodyType {
 
     @Override
     public String toString() {
-        return inBrunoStyle();
+        return name();
     }
 
     public enum BodyMode {

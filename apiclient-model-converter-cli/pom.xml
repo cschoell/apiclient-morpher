@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.cschoell.apiclient.converter</groupId>
+        <artifactId>apiclient-converter-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>apiclient-model-converter-cli</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>apiclient-model-converter-cli</name>
+    <description>CLI for converting between different configuration models</description>
+
+    <properties>
+        <jdk.version>17.0.2</jdk.version>
+        <compiler-plugin.version>3.10.1</compiler-plugin.version>
+        <jreleaser-plugin.version>1.2.0</jreleaser-plugin.version>
+        <os-plugin.version>1.7.0</os-plugin.version>
+        <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>17</java.version>
+        <repackage.classifier/>
+        <launcher.class.name>org.cschoell.apiclient.converter.cli.ConverterCommandLine</launcher.class.name>
+        <jdks-java.version>17.0.4.1</jdks-java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.cschoell.apiclient.converter</groupId>
+            <artifactId>postman-bruno-converter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!-- annotationProcessorPaths requires maven-compiler-plugin version 3.5 or higher -->
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>info.picocli</groupId>
+                            <artifactId>picocli-codegen</artifactId>
+                            <version>${picocli.version}</version>
+                        </path>
+                        <path>
+                            <groupId>info.picocli</groupId>
+                            <artifactId>picocli-codegen</artifactId>
+                            <version>${picocli.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>${os-plugin.version}</version>
+            </extension>
+        </extensions>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/dependentJars</outputDirectory>
+                                <overWriteReleases>false</overWriteReleases>
+                                <overWriteSnapshots>true</overWriteSnapshots>
+                                <overWriteIfNewer>true</overWriteIfNewer>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.jreleaser</groupId>
+                    <artifactId>jreleaser-maven-plugin</artifactId>
+                    <version>${jreleaser-plugin.version}</version>
+                    <configuration>
+                        <jreleaser>
+                            <environment>
+                                <properties>
+                                    <jdkFilePrefix>zulu17.36.17-ca-jdk17.0.4.1</jdkFilePrefix>
+                                </properties>
+                            </environment>
+                            <project>
+                                <stereotype>CLI</stereotype>
+                                <java>
+                                    <mainClass>${launcher.class.name}</mainClass>
+                                </java>
+                            </project>
+                            <assemble>
+                                <jlink>
+                                    <apiclient-model-converter-cli-jlink>
+                                        <active>ALWAYS</active>
+                                        <imageName>{{distributionName}}-{{projectVersion}}</imageName>
+                                        <targetJdks>
+                                            <!--                                            <targetJdk>-->
+                                            <!--                                                <path>${project.build.directory}/jdks/zulu17Osx/{{jdkFilePrefix}}-macosx_x64/zulu-17.jdk/Contents/Home</path>-->
+                                            <!--                                                <platform>osx-x86_64</platform>-->
+                                            <!--                                            </targetJdk>-->
+                                            <!--                                            <targetJdk>-->
+                                            <!--                                                <path>${project.build.directory}/jdks/zulu17Linux/{{jdkFilePrefix}}-linux_x64</path>-->
+                                            <!--                                                <platform>linux-x86_64</platform>-->
+                                            <!--                                            </targetJdk>-->
+                                            <targetJdk>
+                                                <path>
+                                                    ${project.build.directory}/jdks/zulu17Windows/{{jdkFilePrefix}}-win_x64
+                                                </path>
+                                                <platform>windows-x86_64</platform>
+                                            </targetJdk>
+                                        </targetJdks>
+                                        <jars>
+                                            <jar>
+                                                <pattern>target/dependentJars/*.jar</pattern>
+                                            </jar>
+                                        </jars>
+                                        <copyJars>true</copyJars>
+                                        <jdeps>
+                                            <enabled>false</enabled>
+                                            <multiRelease>base</multiRelease>
+                                            <ignoreMissingDeps>true</ignoreMissingDeps>
+                                        </jdeps>
+<!--                                        <args>-->
+<!--                                            <arg>&#45;&#45;bind-services</arg>-->
+<!--                                        </args>-->
+                                        <mainJar>
+
+                                            <path>
+                                                ${project.build.directory}/apiclient-model-converter-cli-{{projectVersion}}.jar
+                                            </path>
+                                        </mainJar>
+                                    </apiclient-model-converter-cli-jlink>
+                                </jlink>
+                                <jpackage>
+                                    <apiclient-model-converter-cli>
+                                        <active>ALWAYS</active>
+                                        <jlink>apiclient-model-converter-cli-jlink</jlink>
+                                        <verbose>true</verbose>
+                                        <applicationPackage>
+                                            <appName>apiclient-model-converter-cli</appName>
+                                            <vendor>cschoell</vendor>
+                                            <appVersion>1.0.0</appVersion>
+                                        </applicationPackage>
+                                        <!--                                        <osx>-->
+                                        <!--                                            <types>pkg</types>-->
+                                        <!--                                            <packageIdentifier>com.example.apiclient-model-converter-cli</packageIdentifier>-->
+                                        <!--                                        </osx>-->
+<!--                                        <linux>-->
+<!--                                            <types>deb</types>-->
+<!--                                            <maintainer>cschoell</maintainer>-->
+<!--                                        </linux>-->
+                                        <windows>
+                                            <types>msi</types>
+                                        </windows>
+                                        <mainJar>
+                                            <path>
+                                                ${project.build.directory}/apiclient-model-converter-cli-{{projectVersion}}.jar
+                                            </path>
+                                        </mainJar>
+                                    </apiclient-model-converter-cli>
+                                </jpackage>
+                            </assemble>
+                            <release>
+                                <github>
+                                    <tagName>{{projectVersion}}</tagName>
+                                    <releaseName>{{projectVersion}}</releaseName>
+                                    <overwrite>true</overwrite>
+                                    <changelog>
+                                        <formatted>ALWAYS</formatted>
+                                        <preset>conventional-commits</preset>
+                                        <format>- {{commitShortHash}} {{commitTitle}}</format>
+                                        <contributors>
+                                            <format>- {{contributorName}}</format>
+                                        </contributors>
+                                        <hide>
+                                            <categories>merge</categories>
+                                            <contributors>GitHub,dependabot</contributors>
+                                        </hide>
+                                    </changelog>
+                                </github>
+                            </release>
+                            <project>
+                                <copyright>Apache2.0</copyright>
+                            </project>
+                        </jreleaser>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!--        <plugins>-->
+        <!--            <plugin>-->
+        <!--                <groupId>org.springframework.boot</groupId>-->
+        <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+        <!--                <configuration>-->
+        <!--                    <classifier>${repackage.classifier}</classifier>-->
+        <!--                    <image>-->
+        <!--                        <builder>paketobuildpacks/builder:tiny</builder>-->
+        <!--                        <env>-->
+        <!--                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>-->
+        <!--                        </env>-->
+        <!--                    </image>-->
+        <!--                </configuration>-->
+        <!--            </plugin>-->
+        <!--        </plugins>-->
+    </build>
+
+    <profiles>
+        <profile>
+            <id>jdks</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jreleaser</groupId>
+                        <artifactId>jdks-maven-plugin</artifactId>
+                        <version>${jreleaser-plugin.version}</version>
+                        <configuration>
+                            <pkgs>
+                                <!--                                <pkg>-->
+                                <!--                                    <name>zulu17Linux</name>-->
+                                <!--                                    <platform>linux-x86_64</platform>-->
+                                <!--                                    <version>${jdks-java.version}</version>-->
+                                <!--                                </pkg>-->
+                                <!--                                <pkg>-->
+                                <!--                                    <name>zulu17Osx</name>-->
+                                <!--                                    <platform>osx-x86_64</platform>-->
+                                <!--                                    <version>${java.version}</version>-->
+                                <!--                                </pkg>-->
+                                <pkg>
+                                    <name>zulu17Windows</name>
+                                    <platform>windows-x86_64</platform>
+                                    <version>${jdks-java.version}</version>
+                                </pkg>
+                            </pkgs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>download-jdks</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>setup-disco</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>assemble</id>
+            <properties>
+                <jreleaser.config.assembly>true</jreleaser.config.assembly>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jreleaser</groupId>
+                        <artifactId>jreleaser-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>assemble</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>assemble</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jreleaser</groupId>
+                        <artifactId>jreleaser-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+    <!--    <profiles>-->
+    <!--        <profile>-->
+    <!--            <id>jdks</id>-->
+    <!--            <build>-->
+    <!--                <defaultGoal>jdks:setup-disco</defaultGoal>-->
+    <!--                <plugins>-->
+    <!--                    <plugin>-->
+    <!--                        <groupId>org.jreleaser</groupId>-->
+    <!--                        <artifactId>jdks-maven-plugin</artifactId>-->
+    <!--                        <version>1.5.1</version>-->
+    <!--                        <configuration>-->
+    <!--                            <pkgs>-->
+    <!--                                <pkg>-->
+    <!--                                    <name>zulu17LinuxIntel</name>-->
+    <!--                                    <platform>linux-x86_64</platform>-->
+    <!--                                    <version>${jdk.version}</version>-->
+    <!--                                </pkg>-->
+    <!--&lt;!&ndash;                                <pkg>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                    <name>zulu17OsxIntel</name>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                    <platform>osx-x86_64</platform>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                    <version>${jdk.version}</version>&ndash;&gt;-->
+    <!--&lt;!&ndash;                                </pkg>&ndash;&gt;-->
+    <!--                                <pkg>-->
+    <!--                                    <name>zulu17WindowsIntel</name>-->
+    <!--                                    <platform>windows-x86_64</platform>-->
+    <!--                                    <version>${jdk.version}</version>-->
+    <!--                                </pkg>-->
+    <!--                            </pkgs>-->
+    <!--                        </configuration>-->
+    <!--                    </plugin>-->
+    <!--                </plugins>-->
+    <!--            </build>-->
+    <!--        </profile>-->
+    <!--    </profiles>-->
+</project>

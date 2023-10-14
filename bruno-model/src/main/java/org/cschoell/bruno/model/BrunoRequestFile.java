@@ -48,7 +48,7 @@ public class BrunoRequestFile {
 
     private PostResponseVars postResponseVars;
 
-    private Assert asserts;
+    private Assert anAssert;
 
     private PreRequestScript preRequestScript;
 

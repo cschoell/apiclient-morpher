@@ -5,9 +5,11 @@ import lombok.Data;
 @Data
 public class PreRequestVars extends BrunoValueBase {
 
+    public static final String NAME = "vars:pre-request";
+
     @Override
     public String getComponentRootName() {
-        return "vars:pre-request";
+        return NAME;
     }
 
 }

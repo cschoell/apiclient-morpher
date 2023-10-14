@@ -2,11 +2,13 @@ package org.cschoell.bruno.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.apache.commons.io.FileSystem;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@ToString(callSuper = true)
 @Data
 @NoArgsConstructor
 public class Folder {

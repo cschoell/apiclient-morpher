@@ -1,6 +1,6 @@
 package org.cschoell.bruno;
 
-import org.cschoell.bruno.mapper.PostmanToBrunoCollectionMapper;
+import org.cschoell.convert.mapper.PostmanToBrunoCollectionMapper;
 import org.cschoell.bruno.model.BrunoCollection;
 import org.cschoell.postman.model.PostmanCollection;
 import org.cschoell.testsupport.TestCollectionProvider;

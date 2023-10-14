@@ -1,12 +1,10 @@
 package org.cschoell.bruno.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +14,8 @@ public class RawBody extends BrunoValueBase implements Body {
 
     @Override
     public String getComponentRootName() {
-        return type == BodyType.none ? "body" : "body:" + type.inBrunoStyle();
+        final String style = type == null ? BodyType.none.name() : type.inBrunoStyle();
+        return type == BodyType.none ? "body" : "body:" + style;
     }
 
 

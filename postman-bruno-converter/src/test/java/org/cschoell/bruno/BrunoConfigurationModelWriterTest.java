@@ -1,11 +1,12 @@
 package org.cschoell.bruno;
 
+import org.cschoell.bruno.writer.BrunoConfigurationModelWriter;
 import org.cschoell.testsupport.TestCollectionProvider;
 import org.junit.jupiter.api.Test;
 
-class BrunoCollectionWriterTest {
+class BrunoConfigurationModelWriterTest {
 
-    BrunoCollectionWriter underTest = new BrunoCollectionWriter();
+    BrunoConfigurationModelWriter underTest = new BrunoConfigurationModelWriter();
     private TestCollectionProvider testCollectionProvider = new TestCollectionProvider();
 
     @Test
