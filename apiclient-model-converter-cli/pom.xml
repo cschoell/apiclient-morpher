@@ -258,6 +258,9 @@
     <profiles>
         <profile>
             <id>jdks</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -298,6 +301,9 @@
         </profile>
         <profile>
             <id>assemble</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <properties>
                 <jreleaser.config.assembly>true</jreleaser.config.assembly>
             </properties>
@@ -332,39 +338,4 @@
         </profile>
     </profiles>
 
-
-    <!--    <profiles>-->
-    <!--        <profile>-->
-    <!--            <id>jdks</id>-->
-    <!--            <build>-->
-    <!--                <defaultGoal>jdks:setup-disco</defaultGoal>-->
-    <!--                <plugins>-->
-    <!--                    <plugin>-->
-    <!--                        <groupId>org.jreleaser</groupId>-->
-    <!--                        <artifactId>jdks-maven-plugin</artifactId>-->
-    <!--                        <version>1.5.1</version>-->
-    <!--                        <configuration>-->
-    <!--                            <pkgs>-->
-    <!--                                <pkg>-->
-    <!--                                    <name>zulu17LinuxIntel</name>-->
-    <!--                                    <platform>linux-x86_64</platform>-->
-    <!--                                    <version>${jdk.version}</version>-->
-    <!--                                </pkg>-->
-    <!--&lt;!&ndash;                                <pkg>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                    <name>zulu17OsxIntel</name>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                    <platform>osx-x86_64</platform>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                    <version>${jdk.version}</version>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                </pkg>&ndash;&gt;-->
-    <!--                                <pkg>-->
-    <!--                                    <name>zulu17WindowsIntel</name>-->
-    <!--                                    <platform>windows-x86_64</platform>-->
-    <!--                                    <version>${jdk.version}</version>-->
-    <!--                                </pkg>-->
-    <!--                            </pkgs>-->
-    <!--                        </configuration>-->
-    <!--                    </plugin>-->
-    <!--                </plugins>-->
-    <!--            </build>-->
-    <!--        </profile>-->
-    <!--    </profiles>-->
 </project>

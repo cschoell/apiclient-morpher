@@ -19,7 +19,7 @@ import lombok.Data;
         "graphqlVarsBody",
         "preRequestVars",
         "postResponseVars",
-        "asserts",
+        "assert",
         "preRequestScript",
         "postResponseScript",
         "tests"
