@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.cschoell.apiclient.converter</groupId>
-        <artifactId>apiclient-converter-parent</artifactId>
+        <artifactId>apiclient-morpher-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>apiclient-converter-api</artifactId>
+    <artifactId>apiclient-morpher-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>apiclient-converter-api</name>
+    <name>apiclient-morpher-api</name>
     <description>API used by converter libraries</description>
     <dependencies>
         <dependency>

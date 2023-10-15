@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>org.cschoell.apiclient.converter</groupId>
-    <artifactId>apiclient-converter-parent</artifactId>
+    <artifactId>apiclient-morpher-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>postman-converter</name>
     <description>Parent for the Tool to convert postman collections into different formats (e.g. Bruno)</description>
@@ -94,12 +94,12 @@
     </build>
 
     <modules>
-        <module>apiclient-converter-api</module>
+        <module>apiclient-morpher-api</module>
         <module>generic-model</module>
         <module>bruno-model</module>
         <module>postman-model</module>
         <module>postman-model-fromschema-generator</module>
-        <module>apiclient-model-converter-cli</module>
+        <module>apiclient-morpher-cli</module>
     </modules>
 
 </project>

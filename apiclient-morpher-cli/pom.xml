@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.cschoell.apiclient.converter</groupId>
-        <artifactId>apiclient-converter-parent</artifactId>
+        <artifactId>apiclient-morpher-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>apiclient-model-converter-cli</artifactId>
+    <artifactId>apiclient-morpher-cli</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>apiclient-model-converter-cli</name>
+    <name>apiclient-morpher-cli</name>
     <description>CLI for converting between different configuration models</description>
 
     <properties>
@@ -150,7 +150,7 @@
                             </project>
                             <assemble>
                                 <jlink>
-                                    <apiclient-model-converter-cli-jlink>
+                                    <apiclient-morpher-cli-jlink>
                                         <active>ALWAYS</active>
                                         <imageName>{{distributionName}}-{{projectVersion}}</imageName>
                                         <targetJdks>
@@ -186,24 +186,24 @@
                                         <mainJar>
 
                                             <path>
-                                                ${project.build.directory}/apiclient-model-converter-cli-{{projectVersion}}.jar
+                                                ${project.build.directory}/apiclient-morpher-cli-{{projectVersion}}.jar
                                             </path>
                                         </mainJar>
-                                    </apiclient-model-converter-cli-jlink>
+                                    </apiclient-morpher-cli-jlink>
                                 </jlink>
                                 <jpackage>
-                                    <apiclient-model-converter-cli>
+                                    <apiclient-morpher-cli>
                                         <active>ALWAYS</active>
-                                        <jlink>apiclient-model-converter-cli-jlink</jlink>
+                                        <jlink>apiclient-morpher-cli-jlink</jlink>
                                         <verbose>true</verbose>
                                         <applicationPackage>
-                                            <appName>apiclient-model-converter-cli</appName>
+                                            <appName>apiclient-morpher-cli</appName>
                                             <vendor>cschoell</vendor>
                                             <appVersion>1.0.0</appVersion>
                                         </applicationPackage>
                                         <!--                                        <osx>-->
                                         <!--                                            <types>pkg</types>-->
-                                        <!--                                            <packageIdentifier>com.example.apiclient-model-converter-cli</packageIdentifier>-->
+                                        <!--                                            <packageIdentifier>com.example.apiclient-morpher-cli</packageIdentifier>-->
                                         <!--                                        </osx>-->
 <!--                                        <linux>-->
 <!--                                            <types>deb</types>-->
@@ -214,10 +214,10 @@
                                         </windows>
                                         <mainJar>
                                             <path>
-                                                ${project.build.directory}/apiclient-model-converter-cli-{{projectVersion}}.jar
+                                                ${project.build.directory}/apiclient-morpher-cli-{{projectVersion}}.jar
                                             </path>
                                         </mainJar>
-                                    </apiclient-model-converter-cli>
+                                    </apiclient-morpher-cli>
                                 </jpackage>
                             </assemble>
                             <release>
