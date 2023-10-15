@@ -1,0 +1,314 @@
+{
+  "info": {
+    "_postman_id": "0c92844a-d78b-4144-8797-f41b063ac9a9",
+    "name": "Test Collection 1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Bearer Token Request",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "708e90e7-d2bd-4570-8af1-0b69d4265102",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "6452c733-9da3-4dc6-8446-7b02a48123a2",
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);\r",
+              "pm.globals.set(\"access_token\", jsonData.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "d120503b-70c6-4552-8ff5-3de1a82f1f17",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{UserTest}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{PasswordTest}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "client_id",
+              "value": "{{oAuthClientId}}",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "{{oAuthClientSecret}}",
+              "type": "text"
+            },
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api-test.cschoell.com/v1/partners/oauth/token",
+          "protocol": "https",
+          "host": [
+            "api-test",
+            "lufthansa",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "partners",
+            "oauth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "SendResult",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "88bec682-c533-4cd0-a51d-f8fa810c348d",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "22a52103-be91-4af4-bfa8-6dd77e99ce6b",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Access-Control-Allow-Credentials",
+            "value": "",
+            "name": "Access-Control-Allow-Credentials",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "",
+            "name": "Access-Control-Allow-Headers",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "",
+            "name": "Access-Control-Allow-Methods",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "",
+            "name": "Access-Control-Allow-Origin",
+            "description": ""
+          },
+          {
+            "key": "Access-Control-Expose-Headers",
+            "value": "",
+            "name": "Access-Control-Expose-Headers",
+            "description": ""
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive",
+            "name": "Connection",
+            "description": ""
+          },
+          {
+            "key": "Content-Length",
+            "value": "15",
+            "name": "Content-Length",
+            "description": ""
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json; charset=utf-8",
+            "name": "Content-Type",
+            "description": ""
+          },
+          {
+            "key": "Date",
+            "value": "Wed, 11 Jan 2017 10:27:53 GMT",
+            "name": "Date",
+            "description": ""
+          },
+          {
+            "key": "ETag",
+            "value": "W/\"f-/i9mO/upK91ZtL0BkKFGtw\"",
+            "name": "ETag",
+            "description": ""
+          },
+          {
+            "key": "Server",
+            "value": "nginx/1.10.1",
+            "name": "Server",
+            "description": ""
+          },
+          {
+            "key": "Vary",
+            "value": "Accept-Encoding",
+            "name": "Vary",
+            "description": ""
+          },
+          {
+            "key": "set-cookie",
+            "value": "sails.sid=s%3ATNJaNxi2QCv4RPBb64sIZxQGN1h6IP3g.9sQVAijlsLsh0r7LgffxXa9k2we6UumPEVv%2Bsk4woLI; Path=/; HttpOnly",
+            "name": "set-cookie",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"person\": {\r\n    \"firstname\": \"Max\",\r\n    \"surname\": \"Muster\"\r\n  },\r\n   \"record\": {\r\n    \"ticket\": \"12345423\",\r\n    \"orderId\": \"T1235\"\r\n  },\r\n  \"result\": {\r\n    \"x\": \"\",\r\n    \"date\": \"2018-9-09T07:00:39.409Z\",\r\n    \"reportId\": \"1234\"  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            },
+            "raw2": "json"
+
+          }
+        },
+        "url": {
+          "raw": "https://api-test.cschoell.com/v1/person/sendResult",
+          "protocol": "https",
+          "host": [
+            "api-test",
+            "lufthansa",
+            "com"
+          ],
+          "path": [
+            "personbackend",
+            "sendResult"
+          ],
+          "query": [
+            {
+              "key": "timestamp",
+              "value": "2016-10-10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Graphql Request",
+      "id": "078883ea-ac9e-842e-8f41-784b59a33722",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+              "query" : "query ($organization: String!) {\n  organization(login: $organization) {\n    name\n    url\n  }\n}",
+              "variables" : "{\n  \"organization\": \"the-road-to-learn-react\"\n}"
+
+          }
+        },
+        "url": {
+          "raw": "https://postman-echo.com/graphql",
+          "protocol": "https",
+          "host": [
+            "postman-echo",
+            "com"
+          ],
+          "path": [
+            "get"
+          ],
+          "query": [
+            {
+              "key": "test",
+              "value": "123"
+            }
+          ]
+        },
+        "description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessToken",
+        "value": "someaccesstoken",
+        "type": "string"
+      },
+      {
+        "key": "tokenType",
+        "value": "bearer",
+        "type": "string"
+      },
+      {
+        "key": "addTokenTo",
+        "value": "queryParams",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "af893c33-5265-4d8e-ad92-13458c412f4f",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "165905dd-906e-42ed-98df-dda1a9560c99",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
