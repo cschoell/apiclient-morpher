@@ -1,8 +1,8 @@
-package org.cschoell.bruno.reader;
+package org.cschoell.bruno.module.reader;
 
 import org.cschoell.apiclient.converter.api.ApiConfigurationType;
 import org.cschoell.apiclient.converter.api.ModelReader;
-import org.cschoell.bruno.BrunoConfigurationModel;
+import org.cschoell.bruno.module.BrunoConfigurationModel;
 import org.cschoell.bruno.model.BrunoCollection;
 
 import java.io.File;

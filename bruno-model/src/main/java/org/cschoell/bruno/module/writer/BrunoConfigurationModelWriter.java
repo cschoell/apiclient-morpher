@@ -1,11 +1,10 @@
-package org.cschoell.bruno.writer;
+package org.cschoell.bruno.module.writer;
 
 import org.apache.commons.io.FileSystem;
 import org.apache.commons.io.FileUtils;
 import org.cschoell.apiclient.converter.api.ApiConfigurationType;
 import org.cschoell.apiclient.converter.api.ModelWriter;
-import org.cschoell.bruno.BrunoConfigurationModel;
-import org.cschoell.bruno.RequestContentBuilder;
+import org.cschoell.bruno.module.BrunoConfigurationModel;
 import org.cschoell.bruno.model.BrunoCollection;
 import org.cschoell.bruno.model.BrunoRequestFile;
 import org.cschoell.bruno.model.Folder;

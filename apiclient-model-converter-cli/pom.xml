@@ -39,7 +39,12 @@
         </dependency>
         <dependency>
             <groupId>org.cschoell.apiclient.converter</groupId>
-            <artifactId>postman-bruno-converter</artifactId>
+            <artifactId>postman-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cschoell.apiclient.converter</groupId>
+            <artifactId>bruno-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

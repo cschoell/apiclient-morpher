@@ -1,11 +1,10 @@
 package org.cschoell.apiclient.converter.cli;
 
 import org.cschoell.apiclient.converter.api.*;
-import org.cschoell.bruno.BrunoConfigurationModel;
-import org.cschoell.convert.BrunoModule;
-import org.cschoell.convert.PostmanModule;
+import org.cschoell.bruno.module.BrunoConfigurationModel;
+import org.cschoell.bruno.module.BrunoModule;
+import org.cschoell.postman.module.PostmanModule;
 import org.cschoell.generic.model.GCollection;
-import org.cschoell.postman.PostmanConfigurationModel;
 import picocli.CommandLine;
 
 import java.io.File;

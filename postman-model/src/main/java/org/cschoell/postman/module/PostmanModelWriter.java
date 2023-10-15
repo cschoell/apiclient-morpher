@@ -1,4 +1,4 @@
-package org.cschoell.postman;
+package org.cschoell.postman.module;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cschoell.apiclient.converter.api.ApiConfigurationType;

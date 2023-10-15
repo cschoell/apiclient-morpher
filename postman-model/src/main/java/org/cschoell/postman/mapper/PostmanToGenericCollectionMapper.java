@@ -1,4 +1,4 @@
-package org.cschoell.convert.mapper;
+package org.cschoell.postman.mapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cschoell.generic.model.*;

@@ -99,7 +99,6 @@
         <module>bruno-model</module>
         <module>postman-model</module>
         <module>postman-model-fromschema-generator</module>
-        <module>postman-bruno-converter</module>
         <module>apiclient-model-converter-cli</module>
     </modules>
 

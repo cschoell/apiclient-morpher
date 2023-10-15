@@ -1,4 +1,4 @@
-package org.cschoell.bruno;
+package org.cschoell.bruno.module.writer;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

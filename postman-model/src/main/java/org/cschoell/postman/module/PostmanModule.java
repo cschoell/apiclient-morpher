@@ -1,16 +1,8 @@
-package org.cschoell.convert;
+package org.cschoell.postman.module;
 
 import org.cschoell.apiclient.converter.api.*;
-import org.cschoell.bruno.BrunoConfigurationModel;
-import org.cschoell.bruno.model.BrunoCollection;
-import org.cschoell.bruno.reader.BrunoConfigurationModelReader;
-import org.cschoell.bruno.writer.BrunoConfigurationModelWriter;
-import org.cschoell.convert.mapper.GenericToBrunoCollectionMapper;
-import org.cschoell.convert.mapper.PostmanToGenericCollectionMapper;
+import org.cschoell.postman.mapper.PostmanToGenericCollectionMapper;
 import org.cschoell.generic.model.GCollection;
-import org.cschoell.postman.PostmanConfigurationModel;
-import org.cschoell.postman.PostmanModelReader;
-import org.cschoell.postman.PostmanModelWriter;
 
 public class PostmanModule implements ConverterModule<PostmanConfigurationModel> {
 
@@ -37,7 +29,7 @@ public class PostmanModule implements ConverterModule<PostmanConfigurationModel>
 
     @Override
     public ModelMapper<PostmanConfigurationModel> getMapper() {
-        return new ModelMapper<PostmanConfigurationModel>() {
+        return new ModelMapper<>() {
             @Override
             public GCollection mapToGeneric(PostmanConfigurationModel from) {
                 return postmanToGenericCollectionMapper.toGenericCollection(from.getContent());

@@ -1,4 +1,4 @@
-package org.cschoell.convert.mapper;
+package org.cschoell.bruno.mapper;
 
 import org.cschoell.bruno.model.Auth;
 import org.cschoell.bruno.model.Query;

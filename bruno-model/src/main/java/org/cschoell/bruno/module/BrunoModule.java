@@ -1,12 +1,10 @@
-package org.cschoell.convert;
+package org.cschoell.bruno.module;
 
 import org.cschoell.apiclient.converter.api.*;
-import org.cschoell.bruno.BrunoConfigurationModel;
-import org.cschoell.bruno.reader.BrunoConfigurationModelReader;
-import org.cschoell.convert.mapper.GenericToBrunoCollectionMapper;
-import org.cschoell.convert.mapper.PostmanToBrunoCollectionMapper;
 import org.cschoell.bruno.model.BrunoCollection;
-import org.cschoell.bruno.writer.BrunoConfigurationModelWriter;
+import org.cschoell.bruno.module.reader.BrunoConfigurationModelReader;
+import org.cschoell.bruno.module.writer.BrunoConfigurationModelWriter;
+import org.cschoell.bruno.mapper.GenericToBrunoCollectionMapper;
 import org.cschoell.generic.model.GCollection;
 
 public class BrunoModule implements ConverterModule<BrunoConfigurationModel> {
@@ -34,7 +32,7 @@ public class BrunoModule implements ConverterModule<BrunoConfigurationModel> {
 
     @Override
     public ModelMapper<BrunoConfigurationModel> getMapper() {
-        return new ModelMapper<BrunoConfigurationModel>() {
+        return new ModelMapper<>() {
             @Override
             public GCollection mapToGeneric(BrunoConfigurationModel from) {
 //                    BrunoCollection target = genericToBrunoCollectionMapper.toBrunoCollection(from);

@@ -1,4 +1,4 @@
-package org.cschoell.postman;
+package org.cschoell.postman.module;
 
 import lombok.extern.slf4j.Slf4j;
 import org.cschoell.apiclient.converter.api.ApiConfigurationType;

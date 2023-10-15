@@ -1,4 +1,4 @@
-package org.cschoell.bruno.reader;
+package org.cschoell.bruno.module.reader;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
