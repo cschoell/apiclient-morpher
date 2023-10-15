@@ -47,7 +47,7 @@ public class PostmanCollection {
      */
     @JsonProperty("event")
     @JsonPropertyDescription("Postman allows you to configure scripts to run when specific events occur. These scripts are stored here, and can be referenced in the collection by their ID.")
-    private List<Event> event = new ArrayList<Event>();
+    private List<Event> event = new ArrayList<>();
     /**
      * Variable List
      * <p>
@@ -57,7 +57,7 @@ public class PostmanCollection {
      */
     @JsonProperty("variable")
     @JsonPropertyDescription("Collection variables allow you to define a set of variables, that are a *part of the collection*, as opposed to environments, which are separate entities.\n*Note: Collection variables must not contain any sensitive information.*")
-    private List<Variable> variable = new ArrayList<Variable>();
+    private List<Variable> variable = new ArrayList<>();
     /**
      * Auth
      * <p>

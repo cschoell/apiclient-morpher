@@ -87,7 +87,7 @@ public class Request {
      */
     @JsonProperty("header")
     @JsonPropertyDescription("A representation for a list of headers")
-    private List<Header> header = new ArrayList<Header>();
+    private List<Header> header = new ArrayList<>();
     /**
      * This field contains the data usually contained in the request body.
      * 
@@ -299,7 +299,7 @@ public class Request {
         PROPFIND("PROPFIND"),
         VIEW("VIEW");
         private final String value;
-        private final static Map<String, Request.Method> CONSTANTS = new HashMap<String, Request.Method>();
+        private final static Map<String, Request.Method> CONSTANTS = new HashMap<>();
 
         static {
             for (Request.Method c: values()) {

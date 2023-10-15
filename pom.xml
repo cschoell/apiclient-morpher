@@ -95,6 +95,7 @@
 
     <modules>
         <module>apiclient-converter-api</module>
+        <module>generic-model</module>
         <module>bruno-model</module>
         <module>postman-model</module>
         <module>postman-model-fromschema-generator</module>

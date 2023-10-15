@@ -40,7 +40,7 @@ public class Certificate {
      */
     @JsonProperty("matches")
     @JsonPropertyDescription("A list of Url match pattern strings, to identify Urls this certificate can be used for.")
-    private List<String> matches = new ArrayList<String>();
+    private List<String> matches = new ArrayList<>();
     /**
      * An object containing path to file containing private key, on the file system
      * 

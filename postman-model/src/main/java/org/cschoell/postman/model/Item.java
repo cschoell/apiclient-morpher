@@ -56,7 +56,7 @@ public class Item extends ItemBase{
      * 
      */
     @JsonProperty("response")
-    private List<Response> response = new ArrayList<Response>();
+    private List<Response> response = new ArrayList<>();
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 

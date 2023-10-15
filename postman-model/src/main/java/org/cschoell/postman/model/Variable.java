@@ -49,7 +49,7 @@ public class Variable {
      */
     @JsonProperty("value")
     @JsonPropertyDescription("The value that a variable holds in this collection. Ultimately, the variables will be replaced by this value, when say running a set of requests from a collection")
-    private Object value;
+    private String value;
     /**
      * A variable may have multiple types. This field specifies the type of the variable.
      * 
@@ -85,156 +85,6 @@ public class Variable {
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
-    /**
-     * A variable ID is a unique user-defined value that identifies the variable within a collection. In traditional terms, this would be a variable name.
-     * 
-     */
-    @JsonProperty("id")
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * A variable ID is a unique user-defined value that identifies the variable within a collection. In traditional terms, this would be a variable name.
-     * 
-     */
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * A variable key is a human friendly value that identifies the variable within a collection. In traditional terms, this would be a variable name.
-     * 
-     */
-    @JsonProperty("key")
-    public String getKey() {
-        return key;
-    }
-
-    /**
-     * A variable key is a human friendly value that identifies the variable within a collection. In traditional terms, this would be a variable name.
-     * 
-     */
-    @JsonProperty("key")
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    /**
-     * The value that a variable holds in this collection. Ultimately, the variables will be replaced by this value, when say running a set of requests from a collection
-     * 
-     */
-    @JsonProperty("value")
-    public Object getValue() {
-        return value;
-    }
-
-    /**
-     * The value that a variable holds in this collection. Ultimately, the variables will be replaced by this value, when say running a set of requests from a collection
-     * 
-     */
-    @JsonProperty("value")
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    /**
-     * A variable may have multiple types. This field specifies the type of the variable.
-     * 
-     */
-    @JsonProperty("type")
-    public Variable.Type getType() {
-        return type;
-    }
-
-    /**
-     * A variable may have multiple types. This field specifies the type of the variable.
-     * 
-     */
-    @JsonProperty("type")
-    public void setType(Variable.Type type) {
-        this.type = type;
-    }
-
-    /**
-     * Variable name
-     * 
-     */
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Variable name
-     * 
-     */
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Description
-     * <p>
-     * A Description can be a raw text, or be an object, which holds the description along with its format.
-     * 
-     */
-    @JsonProperty("description")
-    public Description getDescription() {
-        return description;
-    }
-
-    /**
-     * Description
-     * <p>
-     * A Description can be a raw text, or be an object, which holds the description along with its format.
-     * 
-     */
-    @JsonProperty("description")
-    public void setDescription(Description description) {
-        this.description = description;
-    }
-
-    /**
-     * When set to true, indicates that this variable has been set by Postman
-     * 
-     */
-    @JsonProperty("system")
-    public Boolean getSystem() {
-        return system;
-    }
-
-    /**
-     * When set to true, indicates that this variable has been set by Postman
-     * 
-     */
-    @JsonProperty("system")
-    public void setSystem(Boolean system) {
-        this.system = system;
-    }
-
-    @JsonProperty("disabled")
-    public Boolean getDisabled() {
-        return disabled;
-    }
-
-    @JsonProperty("disabled")
-    public void setDisabled(Boolean disabled) {
-        this.disabled = disabled;
-    }
-
-    @JsonAnyGetter
-    public Map<String, AdditionalProperty> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, AdditionalProperty value) {
-        this.additionalProperties.put(name, value);
-    }
-
 
     /**
      * A variable may have multiple types. This field specifies the type of the variable.
@@ -247,7 +97,7 @@ public class Variable {
         ANY("any"),
         NUMBER("number");
         private final String value;
-        private final static Map<String, Variable.Type> CONSTANTS = new HashMap<String, Variable.Type>();
+        private final static Map<String, Variable.Type> CONSTANTS = new HashMap<>();
 
         static {
             for (Variable.Type c: values()) {

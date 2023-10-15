@@ -52,14 +52,14 @@ public class Url {
      */
     @JsonProperty("host")
     @JsonPropertyDescription("The host for the URL, E.g: api.yourdomain.com. Can be stored as a string or as an array of strings.")
-    private List<String> host = new ArrayList<String>();
+    private List<String> host = new ArrayList<>();
     /**
      * The complete path of the current url, broken down into segments. A segment could be a string, or a path variable.
      * 
      */
     @JsonProperty("path")
     @JsonPropertyDescription("The complete path of the current url, broken down into segments. A segment could be a string, or a path variable.")
-    private List<String> path = new ArrayList<String>();
+    private List<String> path = new ArrayList<>();
     /**
      * The port number present in this URL. An empty value implies 80/443 depending on whether the protocol field contains http/https.
      * 
@@ -73,7 +73,7 @@ public class Url {
      */
     @JsonProperty("query")
     @JsonPropertyDescription("An array of QueryParams, which is basically the query string part of the URL, parsed into separate variables")
-    private List<Query> query = new ArrayList<Query>();
+    private List<Query> query = new ArrayList<>();
     /**
      * Contains the URL fragment (if any). Usually this is not transmitted over the network, but it could be useful to store this in some cases.
      * 
@@ -87,7 +87,7 @@ public class Url {
      */
     @JsonProperty("variable")
     @JsonPropertyDescription("Postman supports path variables with the syntax `/path/:variableName/to/somewhere`. These variables are stored in this field.")
-    private List<Variable> variable = new ArrayList<Variable>();
+    private List<Variable> variable = new ArrayList<>();
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 

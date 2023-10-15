@@ -47,7 +47,7 @@ public class Script {
      */
     @JsonProperty("exec")
     @JsonPropertyDescription("This is an array of strings, where each line represents a single line of code. Having lines separate makes it possible to easily track changes made to scripts.")
-    private List<String> exec = new ArrayList<String>();
+    private List<String> exec = new ArrayList<>();
     /**
      * Url
      * <p>
@@ -66,109 +66,5 @@ public class Script {
     private String name;
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
-
-    /**
-     * A unique, user defined identifier that can  be used to refer to this script from requests.
-     * 
-     */
-    @JsonProperty("id")
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * A unique, user defined identifier that can  be used to refer to this script from requests.
-     * 
-     */
-    @JsonProperty("id")
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * Type of the script. E.g: 'text/javascript'
-     * 
-     */
-    @JsonProperty("type")
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * Type of the script. E.g: 'text/javascript'
-     * 
-     */
-    @JsonProperty("type")
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * This is an array of strings, where each line represents a single line of code. Having lines separate makes it possible to easily track changes made to scripts.
-     * 
-     */
-    @JsonProperty("exec")
-    public List<String> getExec() {
-        return exec;
-    }
-
-    /**
-     * This is an array of strings, where each line represents a single line of code. Having lines separate makes it possible to easily track changes made to scripts.
-     * 
-     */
-    @JsonProperty("exec")
-    public void setExec(List<String> exec) {
-        this.exec = exec;
-    }
-
-    /**
-     * Url
-     * <p>
-     * If object, contains the complete broken-down URL for this request. If string, contains the literal request URL.
-     * 
-     */
-    @JsonProperty("src")
-    public Url getSrc() {
-        return src;
-    }
-
-    /**
-     * Url
-     * <p>
-     * If object, contains the complete broken-down URL for this request. If string, contains the literal request URL.
-     * 
-     */
-    @JsonProperty("src")
-    public void setSrc(Url src) {
-        this.src = src;
-    }
-
-    /**
-     * Script name
-     * 
-     */
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Script name
-     * 
-     */
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonAnyGetter
-    public Map<String, AdditionalProperty> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, AdditionalProperty value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

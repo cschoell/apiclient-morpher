@@ -190,7 +190,7 @@ public class Formdatum {
         TEXT("text"),
         FILE("file");
         private final String value;
-        private final static Map<String, Formdatum.Type> CONSTANTS = new HashMap<String, Formdatum.Type>();
+        private final static Map<String, Formdatum.Type> CONSTANTS = new HashMap<>();
 
         static {
             for (Formdatum.Type c: values()) {

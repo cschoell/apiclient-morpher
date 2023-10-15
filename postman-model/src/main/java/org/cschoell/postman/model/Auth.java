@@ -48,7 +48,7 @@ public class Auth {
      */
     @JsonProperty("apikey")
     @JsonPropertyDescription("The attributes for API Key Authentication.")
-    private List<AuthAttribute> apikey = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> apikey = new ArrayList<>();
     /**
      * AWS Signature v4
      * <p>
@@ -57,7 +57,7 @@ public class Auth {
      */
     @JsonProperty("awsv4")
     @JsonPropertyDescription("The attributes for [AWS Auth](http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).")
-    private List<AuthAttribute> awsv4 = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> awsv4 = new ArrayList<>();
     /**
      * Basic Authentication
      * <p>
@@ -66,7 +66,7 @@ public class Auth {
      */
     @JsonProperty("basic")
     @JsonPropertyDescription("The attributes for [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).")
-    private List<AuthAttribute> basic = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> basic = new ArrayList<>();
     /**
      * Bearer Token Authentication
      * <p>
@@ -75,7 +75,7 @@ public class Auth {
      */
     @JsonProperty("bearer")
     @JsonPropertyDescription("The helper attributes for [Bearer Token Authentication](https://tools.ietf.org/html/rfc6750)")
-    private List<AuthAttribute> bearer = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> bearer = new ArrayList<>();
     /**
      * Digest Authentication
      * <p>
@@ -84,7 +84,7 @@ public class Auth {
      */
     @JsonProperty("digest")
     @JsonPropertyDescription("The attributes for [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).")
-    private List<AuthAttribute> digest = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> digest = new ArrayList<>();
     /**
      * EdgeGrid Authentication
      * <p>
@@ -93,7 +93,7 @@ public class Auth {
      */
     @JsonProperty("edgegrid")
     @JsonPropertyDescription("The attributes for [Akamai EdgeGrid Authentication](https://developer.akamai.com/legacy/introduction/Client_Auth.html).")
-    private List<AuthAttribute> edgegrid = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> edgegrid = new ArrayList<>();
     /**
      * Hawk Authentication
      * <p>
@@ -102,7 +102,7 @@ public class Auth {
      */
     @JsonProperty("hawk")
     @JsonPropertyDescription("The attributes for [Hawk Authentication](https://github.com/hueniverse/hawk)")
-    private List<AuthAttribute> hawk = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> hawk = new ArrayList<>();
     /**
      * NTLM Authentication
      * <p>
@@ -111,7 +111,7 @@ public class Auth {
      */
     @JsonProperty("ntlm")
     @JsonPropertyDescription("The attributes for [NTLM Authentication](https://msdn.microsoft.com/en-us/library/cc237488.aspx)")
-    private List<AuthAttribute> ntlm = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> ntlm = new ArrayList<>();
     /**
      * OAuth1
      * <p>
@@ -120,7 +120,7 @@ public class Auth {
      */
     @JsonProperty("oauth1")
     @JsonPropertyDescription("The attributes for [OAuth2](https://oauth.net/1/)")
-    private List<AuthAttribute> oauth1 = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> oauth1 = new ArrayList<>();
     /**
      * OAuth2
      * <p>
@@ -129,7 +129,7 @@ public class Auth {
      */
     @JsonProperty("oauth2")
     @JsonPropertyDescription("Helper attributes for [OAuth2](https://oauth.net/2/)")
-    private List<AuthAttribute> oauth2 = new ArrayList<AuthAttribute>();
+    private List<AuthAttribute> oauth2 = new ArrayList<>();
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
@@ -395,22 +395,23 @@ public class Auth {
 
     public enum Type {
 
+        NOAUTH("noauth"),
         APIKEY("apikey"),
         @JsonProperty("awsv4")
         AWSV_4("awsv4"),
+
         BASIC("basic"),
         BEARER("bearer"),
         DIGEST("digest"),
         EDGEGRID("edgegrid"),
         HAWK("hawk"),
-        NOAUTH("noauth"),
         @JsonProperty("oauth1")
         OAUTH_1("oauth1"),
         @JsonProperty("oauth2")
         OAUTH_2("oauth2"),
         NTLM("ntlm");
         private final String value;
-        private final static Map<String, Auth.Type> CONSTANTS = new HashMap<String, Auth.Type>();
+        private final static Map<String, Auth.Type> CONSTANTS = new HashMap<>();
 
         static {
             for (Auth.Type c: values()) {

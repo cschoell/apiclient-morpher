@@ -34,7 +34,7 @@ public abstract class ItemBase extends PostmanPolymorphicBase {
      */
     @JsonProperty("variable")
     @JsonPropertyDescription("Collection variables allow you to define a set of variables, that are a *part of the collection*, as opposed to environments, which are separate entities.\n*Note: Collection variables must not contain any sensitive information.*")
-    protected List<Variable> variable = new ArrayList<Variable>();
+    protected List<Variable> variable = new ArrayList<>();
     /**
      * Event List
      * <p>
@@ -43,7 +43,7 @@ public abstract class ItemBase extends PostmanPolymorphicBase {
      */
     @JsonProperty("event")
     @JsonPropertyDescription("Postman allows you to configure scripts to run when specific events occur. These scripts are stored here, and can be referenced in the collection by their ID.")
-    protected List<Event> event = new ArrayList<Event>();
+    protected List<Event> event = new ArrayList<>();
     /**
      * Protocol Profile Behavior
      * <p>

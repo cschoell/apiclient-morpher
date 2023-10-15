@@ -30,6 +30,11 @@
         </dependency>
         <dependency>
             <groupId>org.cschoell.apiclient.converter</groupId>
+            <artifactId>generic-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cschoell.apiclient.converter</groupId>
             <artifactId>postman-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

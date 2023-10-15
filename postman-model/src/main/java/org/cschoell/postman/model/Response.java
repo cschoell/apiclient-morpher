@@ -73,9 +73,9 @@ public class Response {
      */
     @JsonProperty("header")
     @JsonPropertyDescription("No HTTP request is complete without its headers, and the same is true for a Postman request. This field is an array containing all the headers.")
-    private List<Header> header = new ArrayList<Header>();
+    private List<Header> header = new ArrayList<>();
     @JsonProperty("cookie")
-    private List<Cookie> cookie = new ArrayList<Cookie>();
+    private List<Cookie> cookie = new ArrayList<>();
     /**
      * The raw text of the response.
      * 

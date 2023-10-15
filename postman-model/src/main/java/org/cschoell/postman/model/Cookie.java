@@ -106,7 +106,7 @@ public class Cookie {
      */
     @JsonProperty("extensions")
     @JsonPropertyDescription("Custom attributes for a cookie go here, such as the [Priority Field](https://code.google.com/p/chromium/issues/detail?id=232693)")
-    private List<Object> extensions = new ArrayList<Object>();
+    private List<Object> extensions = new ArrayList<>();
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 

@@ -35,9 +35,9 @@ public class Body {
     @JsonProperty("raw")
     private String raw;
     @JsonProperty("urlencoded")
-    private List<Urlencoded> urlencoded = new ArrayList<Urlencoded>();
+    private List<Urlencoded> urlencoded = new ArrayList<>();
     @JsonProperty("formdata")
-    private List<Formdatum> formdata = new ArrayList<Formdatum>();
+    private List<Formdatum> formdata = new ArrayList<>();
     @JsonProperty("file")
     private File file;
     @JsonProperty("graphql")
@@ -186,7 +186,7 @@ public class Body {
         FILE("file"),
         GRAPHQL("graphql");
         private final String value;
-        private final static Map<String, Body.Mode> CONSTANTS = new HashMap<String, Body.Mode>();
+        private final static Map<String, Body.Mode> CONSTANTS = new HashMap<>();
 
         static {
             for (Body.Mode c: values()) {
