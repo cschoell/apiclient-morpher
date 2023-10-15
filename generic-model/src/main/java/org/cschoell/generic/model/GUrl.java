@@ -9,7 +9,7 @@ import lombok.ToString;
 @Data
 public class GUrl extends GenericModelBase {
 
-    private String url;
+    private String raw;
 
 
 }

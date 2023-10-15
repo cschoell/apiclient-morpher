@@ -10,12 +10,12 @@ import org.apache.commons.lang3.StringUtils;
 @NoArgsConstructor
 public class RawBody extends BrunoValueBase implements Body {
 
-    private BodyType type;
+    private BodyType bodyType;
 
     @Override
     public String getComponentRootName() {
-        final String style = type == null ? BodyType.none.name() : type.inBrunoStyle();
-        return type == BodyType.none ? "body" : "body:" + style;
+        final String style = bodyType == null ? BodyType.none.name() : bodyType.inBrunoStyle();
+        return bodyType == BodyType.none ? "body" : "body:" + style;
     }
 
 

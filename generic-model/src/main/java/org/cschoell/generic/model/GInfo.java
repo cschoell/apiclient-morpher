@@ -8,4 +8,8 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class GInfo extends GenericModelBase{
+
+    String name;
+    GVersion version;
+
 }

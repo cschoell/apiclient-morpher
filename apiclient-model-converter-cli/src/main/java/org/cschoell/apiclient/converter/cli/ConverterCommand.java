@@ -2,7 +2,9 @@ package org.cschoell.apiclient.converter.cli;
 
 import org.cschoell.apiclient.converter.api.*;
 import org.cschoell.bruno.BrunoConfigurationModel;
-import org.cschoell.convert.PostmanBrunoModule;
+import org.cschoell.convert.BrunoModule;
+import org.cschoell.convert.PostmanModule;
+import org.cschoell.generic.model.GCollection;
 import org.cschoell.postman.PostmanConfigurationModel;
 import picocli.CommandLine;
 
@@ -30,10 +32,24 @@ public class ConverterCommand implements Callable<String> {
     @Override
     public String call() {
         final ConverterRegistry instance = ConverterRegistry.getInstance();
-        final PostmanBrunoModule module = new PostmanBrunoModule();
+        final BrunoModule module = new BrunoModule();
+        final PostmanModule postmanModule = new PostmanModule();
         instance.registerModule(module);
+        instance.registerModule(postmanModule);
 
-        module.getWriter().writeModel(module.getMapper().map(module.getReader().readModel(source)), target);
+        final GCollection gCollection = postmanModule.getMapper().mapToGeneric(postmanModule.getReader().readModel(source));
+        System.out.println(gCollection);
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        final BrunoConfigurationModel brunoConfigurationModel = module.getMapper().mapFromGeneric(gCollection);
+        module.getWriter().writeModel(brunoConfigurationModel, target);
+
+//        System.out.println(brunoConfigurationModel.getContent());
 
         return "Success";
     }

@@ -12,15 +12,15 @@ import java.util.LinkedHashMap;
 @ToString(callSuper = true)
 public class FormBody extends LinkedHashMap<String, String> implements Body {
 
-    private BodyType type;
+    private BodyType bodyType;
     @Override
     public String getComponentRootName() {
-        return type == BodyType.none ? "body" : "body:" + type.inBrunoStyle();
+        return bodyType == BodyType.none ? "body" : "body:" + bodyType.inBrunoStyle();
     }
 
     @JsonIgnore
-    public BodyType getType() {
-        return type;
+    public BodyType getBodyType() {
+        return bodyType;
     }
 
     @Override

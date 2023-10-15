@@ -88,7 +88,7 @@ public class BrunoRequestFile {
 
     private <T extends Body> T onlyWithContent(T body, BodyType bodyType) {
         if (body == null || !body.hasContent()) return null;
-        body.setType(bodyType);
+        body.setBodyType(bodyType);
         return body;
     }
 }

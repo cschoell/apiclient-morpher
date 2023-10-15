@@ -1,7 +1,10 @@
 package org.cschoell.apiclient.converter.api;
 
-public interface ModelMapper<R extends ConfigurationModel<?>, T extends ConfigurationModel<?>> {
+import org.cschoell.generic.model.GCollection;
 
-    T map(R from);
+public interface ModelMapper<T extends ConfigurationModel<?>> {
+
+    GCollection mapToGeneric(T from);
+    T mapFromGeneric(GCollection from);
 
 }

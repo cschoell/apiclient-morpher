@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 public class GRequest extends GenericModelBase {
 
+    GValue asserts;
     GRequestMeta meta;
 
     GAuth auth;

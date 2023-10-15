@@ -63,9 +63,10 @@ public interface PostmanToGenericCollectionMapper {
     @Mapping(target = "subFolders", source = "item", qualifiedByName = "item")
     GFolder toFolder(VirtualFolder from);
 
+    @Mapping(target = "tests", ignore = true)
+    @Mapping(target = "asserts", ignore = true)
     @Mapping(target = "url", ignore = true)
     @Mapping(target = "type", ignore = true)
-    @Mapping(target = "tests", ignore = true)
     @Mapping(target = "proxy", ignore = true)
     @Mapping(target = "preRequestVars", ignore = true)
     @Mapping(target = "preRequestScript", ignore = true)
@@ -110,14 +111,15 @@ public interface PostmanToGenericCollectionMapper {
     GValue toValue(Formdatum source);
 
     @AfterMapping
-    default void afterToRequestFile(@MappingTarget GRequest brunoRequestFile, Item item) {
-        handleEvents(brunoRequestFile, item);
+    default void afterToRequestFile(@MappingTarget GRequest request, Item item) {
+        handleEvents(request, item);
         final Body.Mode mode = item.getRequest().getBody().getMode();
         GBodyContentType type = toBodyType(mode);
         if (mode == RAW) {
             type = mapBodyLanguage(item.getRequest().getBody().getAdditionalProperties());
             type = mapBodyLanguageViaHeader(type, item.getRequest().getHeader());
         }
+        request.getBody().setContentType(type);
 
     }
 
@@ -219,6 +221,7 @@ public interface PostmanToGenericCollectionMapper {
 
 
     default String buildUrlString(Url url) {
+        if (url == null) return null;
         if (url.getHost() == null || url.getHost().isEmpty()) return url.getRaw();
         String portString = StringUtils.isNotBlank(url.getPort()) ? ":" + url.getPort() : "";
         return url.getProtocol() + "://" + StringUtils.join(url.getHost(), ".") + portString + "/" + StringUtils.join(url.getPath(), "/");

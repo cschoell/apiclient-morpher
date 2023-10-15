@@ -11,7 +11,7 @@ import java.io.IOException;
 class ConverterRunner {
 
 
-    static File targetDirectory = new java.io.File("G:\\postman\\bruno\\test\\Generated");
+    static File targetDirectory = new java.io.File("G:\\postman\\bruno\\test\\GeneratedNew");
 
     static TestCollectionProvider testCollectionProvider = new TestCollectionProvider();
 

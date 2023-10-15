@@ -95,7 +95,7 @@ public interface PostmanToBrunoCollectionMapper {
             final RawBody textBody = brunoRequestFile.getTextBody();
             if (textBody != null && type != BodyType.text) {
                 brunoRequestFile.setTextBody(null);
-                textBody.setType(type);
+                textBody.setBodyType(type);
                 switch (type) {
                     case json -> brunoRequestFile.setJsonBody(textBody);
                     case xml -> brunoRequestFile.setXmlBody(textBody);
@@ -127,7 +127,7 @@ public interface PostmanToBrunoCollectionMapper {
     }
 
     @Mapping(target = "value", source = "value")
-    @Mapping(target = "type", constant = "text")
+    @Mapping(target = "bodyType", constant = "text")
     RawBody mapRawBody(String value);
 
 

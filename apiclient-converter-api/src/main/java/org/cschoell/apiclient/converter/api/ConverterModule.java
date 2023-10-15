@@ -1,12 +1,12 @@
 package org.cschoell.apiclient.converter.api;
 
-public interface ConverterModule<R extends ConfigurationModel<?>, W extends ConfigurationModel<?>> {
+public interface ConverterModule<W extends ConfigurationModel<?>> {
 
-    ModelReader<R> getReader();
+    ModelReader<W> getReader();
 
     ModelWriter<W> getWriter();
 
     ApiConfigurationType getType();
 
-    ModelMapper<R, W> getMapper();
+    ModelMapper<W> getMapper();
 }
