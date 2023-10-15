@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cschoell.apiclient.converter.api.ApiConfigurationType;
 import org.cschoell.apiclient.converter.api.ModelReader;
 import org.cschoell.postman.model.PostmanCollection;
-import org.cschoell.postman.schematoobject.PostmanObjectMapperBuilder;
+import org.cschoell.postman.module.schematoobject.PostmanObjectMapperBuilder;
 
 import java.io.File;
 import java.io.IOException;
