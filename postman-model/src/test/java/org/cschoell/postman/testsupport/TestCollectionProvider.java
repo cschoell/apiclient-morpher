@@ -1,4 +1,4 @@
-package org.cschoell.testsupport;
+package org.cschoell.postman.testsupport;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.cschoell.postman.model.PostmanCollection;
@@ -9,7 +9,12 @@ import java.net.URL;
 
 public class TestCollectionProvider {
 
+    private static TestCollectionProvider myInstance = new TestCollectionProvider();
     private final JsonMapper objectMapper = new PostmanObjectMapperBuilder().build();
+
+    public static TestCollectionProvider instance() {
+        return myInstance;
+    }
 
     public static enum TestCollectionFile {
         postmanecho("/postmanecho.json"),

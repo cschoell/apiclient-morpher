@@ -2,12 +2,16 @@ package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class ItemBase extends PostmanPolymorphicBase {
     /**
      * A human readable identifier for the current item.

@@ -60,6 +60,12 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.cschoell.apiclient.converter</groupId>
+            <artifactId>postman-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>test-jar</type>
+        </dependency>
     </dependencies>
 
     <build>

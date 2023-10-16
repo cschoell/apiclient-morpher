@@ -2,7 +2,9 @@
 package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,6 +23,8 @@ import java.util.Map;
     "version"
 })
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Description {
 
     /**
@@ -48,8 +52,6 @@ public class Description {
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
-    public Description() {
-    }
 
     public Description(String content) {
         this.content = content;

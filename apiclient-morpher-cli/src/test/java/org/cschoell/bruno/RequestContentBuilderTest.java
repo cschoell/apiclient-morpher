@@ -6,7 +6,7 @@ import org.cschoell.bruno.module.writer.RequestContentBuilder;
 import org.cschoell.generic.model.GCollection;
 import org.cschoell.postman.mapper.PostmanToGenericCollectionMapper;
 import org.cschoell.postman.model.PostmanCollection;
-import org.cschoell.testsupport.TestCollectionProvider;
+import org.cschoell.postman.testsupport.TestCollectionProvider;
 import org.junit.jupiter.api.Test;
 
 class RequestContentBuilderTest {

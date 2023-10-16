@@ -4,7 +4,7 @@ import org.cschoell.bruno.mapper.GenericToBrunoCollectionMapper;
 import org.cschoell.bruno.module.BrunoConfigurationModel;
 import org.cschoell.bruno.module.writer.BrunoConfigurationModelWriter;
 import org.cschoell.postman.mapper.PostmanToGenericCollectionMapper;
-import org.cschoell.testsupport.TestCollectionProvider;
+import org.cschoell.postman.testsupport.TestCollectionProvider;
 
 import java.io.File;
 import java.io.IOException;

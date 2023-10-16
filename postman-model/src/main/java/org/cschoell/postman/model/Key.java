@@ -2,7 +2,10 @@
 package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.cschoell.generic.model.GFile;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,6 +20,8 @@ import java.util.Map;
     "src"
 })
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Key {
 
     /**
@@ -25,36 +30,8 @@ public class Key {
      */
     @JsonProperty("src")
     @JsonPropertyDescription("The path to file containing key for certificate, on the file system")
-    private Object src;
+    private String src;
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
-
-    /**
-     * The path to file containing key for certificate, on the file system
-     * 
-     */
-    @JsonProperty("src")
-    public Object getSrc() {
-        return src;
-    }
-
-    /**
-     * The path to file containing key for certificate, on the file system
-     * 
-     */
-    @JsonProperty("src")
-    public void setSrc(Object src) {
-        this.src = src;
-    }
-
-    @JsonAnyGetter
-    public Map<String, AdditionalProperty> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, AdditionalProperty value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

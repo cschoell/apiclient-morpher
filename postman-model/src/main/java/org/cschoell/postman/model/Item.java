@@ -2,8 +2,10 @@
 package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,6 +32,7 @@ import java.util.Map;
     "protocolProfileBehavior"
 })
 @Data
+@NoArgsConstructor
 public class Item extends ItemBase{
 
     /**
@@ -60,4 +63,11 @@ public class Item extends ItemBase{
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
+    public Item(String name, Description description, List<Variable> variable, List<Event> event, ProtocolProfileBehavior protocolProfileBehavior, String id, Request request, List<Response> response, Map<String, AdditionalProperty> additionalProperties) {
+        super(name, description, variable, event, protocolProfileBehavior);
+        this.id = id;
+        this.request = request;
+        this.response = response;
+        this.additionalProperties = additionalProperties;
+    }
 }

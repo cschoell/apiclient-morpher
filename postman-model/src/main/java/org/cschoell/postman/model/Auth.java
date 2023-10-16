@@ -2,7 +2,9 @@
 package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.*;
 
@@ -29,6 +31,8 @@ import java.util.*;
     "oauth2"
 })
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Auth {
 
     /**
@@ -38,8 +42,7 @@ public class Auth {
      */
     @JsonProperty("type")
     private Auth.Type type;
-    @JsonProperty("noauth")
-    private Object noauth;
+
     /**
      * API Key Authentication
      * <p>
@@ -133,265 +136,6 @@ public class Auth {
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("type")
-    public Auth.Type getType() {
-        return type;
-    }
-
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("type")
-    public void setType(Auth.Type type) {
-        this.type = type;
-    }
-
-    @JsonProperty("noauth")
-    public Object getNoauth() {
-        return noauth;
-    }
-
-    @JsonProperty("noauth")
-    public void setNoauth(Object noauth) {
-        this.noauth = noauth;
-    }
-
-    /**
-     * API Key Authentication
-     * <p>
-     * The attributes for API Key Authentication.
-     * 
-     */
-    @JsonProperty("apikey")
-    public List<AuthAttribute> getApikey() {
-        return apikey;
-    }
-
-    /**
-     * API Key Authentication
-     * <p>
-     * The attributes for API Key Authentication.
-     * 
-     */
-    @JsonProperty("apikey")
-    public void setApikey(List<AuthAttribute> apikey) {
-        this.apikey = apikey;
-    }
-
-    /**
-     * AWS Signature v4
-     * <p>
-     * The attributes for [AWS Auth](http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
-     * 
-     */
-    @JsonProperty("awsv4")
-    public List<AuthAttribute> getAwsv4() {
-        return awsv4;
-    }
-
-    /**
-     * AWS Signature v4
-     * <p>
-     * The attributes for [AWS Auth](http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
-     * 
-     */
-    @JsonProperty("awsv4")
-    public void setAwsv4(List<AuthAttribute> awsv4) {
-        this.awsv4 = awsv4;
-    }
-
-    /**
-     * Basic Authentication
-     * <p>
-     * The attributes for [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
-     * 
-     */
-    @JsonProperty("basic")
-    public List<AuthAttribute> getBasic() {
-        return basic;
-    }
-
-    /**
-     * Basic Authentication
-     * <p>
-     * The attributes for [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
-     * 
-     */
-    @JsonProperty("basic")
-    public void setBasic(List<AuthAttribute> basic) {
-        this.basic = basic;
-    }
-
-    /**
-     * Bearer Token Authentication
-     * <p>
-     * The helper attributes for [Bearer Token Authentication](https://tools.ietf.org/html/rfc6750)
-     * 
-     */
-    @JsonProperty("bearer")
-    public List<AuthAttribute> getBearer() {
-        return bearer;
-    }
-
-    /**
-     * Bearer Token Authentication
-     * <p>
-     * The helper attributes for [Bearer Token Authentication](https://tools.ietf.org/html/rfc6750)
-     * 
-     */
-    @JsonProperty("bearer")
-    public void setBearer(List<AuthAttribute> bearer) {
-        this.bearer = bearer;
-    }
-
-    /**
-     * Digest Authentication
-     * <p>
-     * The attributes for [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
-     * 
-     */
-    @JsonProperty("digest")
-    public List<AuthAttribute> getDigest() {
-        return digest;
-    }
-
-    /**
-     * Digest Authentication
-     * <p>
-     * The attributes for [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
-     * 
-     */
-    @JsonProperty("digest")
-    public void setDigest(List<AuthAttribute> digest) {
-        this.digest = digest;
-    }
-
-    /**
-     * EdgeGrid Authentication
-     * <p>
-     * The attributes for [Akamai EdgeGrid Authentication](https://developer.akamai.com/legacy/introduction/Client_Auth.html).
-     * 
-     */
-    @JsonProperty("edgegrid")
-    public List<AuthAttribute> getEdgegrid() {
-        return edgegrid;
-    }
-
-    /**
-     * EdgeGrid Authentication
-     * <p>
-     * The attributes for [Akamai EdgeGrid Authentication](https://developer.akamai.com/legacy/introduction/Client_Auth.html).
-     * 
-     */
-    @JsonProperty("edgegrid")
-    public void setEdgegrid(List<AuthAttribute> edgegrid) {
-        this.edgegrid = edgegrid;
-    }
-
-    /**
-     * Hawk Authentication
-     * <p>
-     * The attributes for [Hawk Authentication](https://github.com/hueniverse/hawk)
-     * 
-     */
-    @JsonProperty("hawk")
-    public List<AuthAttribute> getHawk() {
-        return hawk;
-    }
-
-    /**
-     * Hawk Authentication
-     * <p>
-     * The attributes for [Hawk Authentication](https://github.com/hueniverse/hawk)
-     * 
-     */
-    @JsonProperty("hawk")
-    public void setHawk(List<AuthAttribute> hawk) {
-        this.hawk = hawk;
-    }
-
-    /**
-     * NTLM Authentication
-     * <p>
-     * The attributes for [NTLM Authentication](https://msdn.microsoft.com/en-us/library/cc237488.aspx)
-     * 
-     */
-    @JsonProperty("ntlm")
-    public List<AuthAttribute> getNtlm() {
-        return ntlm;
-    }
-
-    /**
-     * NTLM Authentication
-     * <p>
-     * The attributes for [NTLM Authentication](https://msdn.microsoft.com/en-us/library/cc237488.aspx)
-     * 
-     */
-    @JsonProperty("ntlm")
-    public void setNtlm(List<AuthAttribute> ntlm) {
-        this.ntlm = ntlm;
-    }
-
-    /**
-     * OAuth1
-     * <p>
-     * The attributes for [OAuth2](https://oauth.net/1/)
-     * 
-     */
-    @JsonProperty("oauth1")
-    public List<AuthAttribute> getOauth1() {
-        return oauth1;
-    }
-
-    /**
-     * OAuth1
-     * <p>
-     * The attributes for [OAuth2](https://oauth.net/1/)
-     * 
-     */
-    @JsonProperty("oauth1")
-    public void setOauth1(List<AuthAttribute> oauth1) {
-        this.oauth1 = oauth1;
-    }
-
-    /**
-     * OAuth2
-     * <p>
-     * Helper attributes for [OAuth2](https://oauth.net/2/)
-     * 
-     */
-    @JsonProperty("oauth2")
-    public List<AuthAttribute> getOauth2() {
-        return oauth2;
-    }
-
-    /**
-     * OAuth2
-     * <p>
-     * Helper attributes for [OAuth2](https://oauth.net/2/)
-     * 
-     */
-    @JsonProperty("oauth2")
-    public void setOauth2(List<AuthAttribute> oauth2) {
-        this.oauth2 = oauth2;
-    }
-
-    @JsonAnyGetter
-    public Map<String, AdditionalProperty> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, AdditionalProperty value) {
-        this.additionalProperties.put(name, value);
-    }
 
     public enum Type {
 

@@ -2,7 +2,9 @@
 package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
     "protocolProfileBehavior"
 })
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostmanCollection {
 
     /**

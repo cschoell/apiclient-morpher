@@ -2,7 +2,9 @@
 package org.cschoell.postman.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,6 +27,8 @@ import java.util.Map;
     "passphrase"
 })
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Certificate {
 
     /**
