@@ -71,6 +71,11 @@ public class Formdatum {
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
+    public Formdatum(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     public enum Type {
 
         TEXT("text"),

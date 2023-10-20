@@ -14,7 +14,15 @@ public class GScript extends GenericModelBase {
      */
     String exec;
 
-    String srcUrl;
+    String  srcUrl;
+
+    String contentType;
+
+    String name;
+
+    String id;
+
+    boolean disabled;
 
     /**
      * The client this script has been copied from originally

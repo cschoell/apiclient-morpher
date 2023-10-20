@@ -14,9 +14,8 @@ public class SourcePostmanCollection {
         final List<PostmanPolymorphicBase> items = createItems();
         final List<Event> events = createEvents();
         final List<Variable> variables = createVariables();
-        final Auth auth = createAuth();
         final ProtocolProfileBehavior protocolProfileBehavior = new ProtocolProfileBehavior(null);
-        return new PostmanCollection(info, items, events, variables, auth, protocolProfileBehavior, null);
+        return new PostmanCollection(info, items, events, variables, null, protocolProfileBehavior, null);
     }
 
     private List<Variable> createVariables() {
@@ -25,7 +24,9 @@ public class SourcePostmanCollection {
 
     private ArrayList<PostmanPolymorphicBase> createItems() {
         final ArrayList<PostmanPolymorphicBase> items = new ArrayList<>();
-        items.add(createRequest());
+        final Item request = createRequest();
+        request.getRequest().setAuth(createAuth());
+        items.add(request);
         items.add(createFolder());
         return items;
     }
@@ -33,7 +34,7 @@ public class SourcePostmanCollection {
     private PostmanPolymorphicBase createFolder() {
         final ArrayList<Item> requests = new ArrayList<>();
         requests.add(createRequest());
-        return new VirtualFolder("folder.name", createDescription(), createVariables(), null, new ProtocolProfileBehavior(), requests, createAuth());
+        return new VirtualFolder("folder.name", createDescription(), createVariables(), null, new ProtocolProfileBehavior(), requests, null);
     }
 
     private Item createRequest() {
@@ -42,7 +43,7 @@ public class SourcePostmanCollection {
         final Certificate certificate = new Certificate("cert.name", Arrays.asList("match1", "match2"), new Key("key.src", null),
                 new Cert("cert.src", null), "passphrase", null);
         final Body body = new Body(Body.Mode.URLENCODED, "raw", createUrlEncoded(), createFormData(), new File("file.src", "file.content", null), new Graphql("graphql.query", "graphql.variables", null), new Options(null), false, null);
-        final Request request = new Request(url, createAuth(), proxy, certificate, Request.Method.GET, createDescription(), createHeaders(), body, null);
+        final Request request = new Request(url, null, proxy, certificate, Request.Method.GET, createDescription(), createHeaders(), body, null);
         return new Item("request.name", createDescription(), createVariables(), createEvents(), new ProtocolProfileBehavior(),
                 "rid", request, Collections.emptyList(), null);
     }

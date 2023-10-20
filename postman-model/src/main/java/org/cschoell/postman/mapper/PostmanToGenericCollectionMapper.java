@@ -5,8 +5,6 @@ import org.cschoell.generic.model.*;
 import org.cschoell.generic.model.body.GBody;
 import org.cschoell.generic.model.body.GBodyContentType;
 import org.cschoell.generic.model.body.GKeyValueBody;
-import org.cschoell.postman.model.Auth;
-import org.cschoell.postman.model.Body;
 import org.cschoell.postman.model.*;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -15,8 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static org.cschoell.postman.model.Body.Mode.*;
+import static org.cschoell.postman.model.Body.Mode.RAW;
 
 @Mapper()
 public interface PostmanToGenericCollectionMapper {
@@ -126,24 +125,34 @@ public interface PostmanToGenericCollectionMapper {
     default void handleEvents(GRequest request, Item item) {
         final List<Event> events = item.getEvent();
         for (Event event : events) {
+            final GScript script = toGScript(event.getScript());
+            script.setDisabled(event.getDisabled());
             switch (event.getListen()) {
                 case "test" -> {
-                    request.setTests(toGScript(event.getScript()));
+                    request.setTests(script);
                 }
                 case "prerequest" -> {
-                    request.setPreRequestScript(toGScript(event.getScript()));
+                    request.setPreRequestScript(script);
                 }
                 case "postresponse" -> {
-                    request.setPostResponseScript(toGScript(event.getScript()));
+                    request.setPostResponseScript(script);
                 }
             }
         }
     }
 
+
+    @Mapping(target = "disabled", ignore = true)
+    @Mapping(target = "description", ignore = true)
     @Mapping(target = "srcUrl", source = "src")
     @Mapping(target = "scriptOriginClient", constant = "postman")
+    @Mapping(target = "contentType", source = "type")
     GScript toGScript(Script script);
 
+    @Mapping(target = "type", ignore = true)
+    @Mapping(target = "disabled", ignore = true)
+    @Mapping(target = "description", ignore = true)
+    @Mapping(target = "additionalProperties", ignore = true)
     @Mapping(target = "value", source = "val")
     GValue toValue(String val);
 
@@ -224,7 +233,8 @@ public interface PostmanToGenericCollectionMapper {
         if (url == null) return null;
         if (url.getHost() == null || url.getHost().isEmpty()) return url.getRaw();
         String portString = StringUtils.isNotBlank(url.getPort()) ? ":" + url.getPort() : "";
-        return url.getProtocol() + "://" + StringUtils.join(url.getHost(), ".") + portString + "/" + StringUtils.join(url.getPath(), "/");
+        String queryString = url.getQuery().isEmpty() ? "" : "?" + url.getQuery().stream().map(query -> query.getKey() + "=" + query.getValue()).collect(Collectors.joining("&"));
+        return url.getProtocol() + "://" + StringUtils.join(url.getHost(), ".") + portString + "/" + StringUtils.join(url.getPath(), "/") + queryString;
     }
 
 }

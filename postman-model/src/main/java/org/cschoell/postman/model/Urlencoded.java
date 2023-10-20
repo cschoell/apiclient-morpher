@@ -51,6 +51,11 @@ public class Urlencoded {
     @JsonIgnore
     private Map<String, AdditionalProperty> additionalProperties = new LinkedHashMap<>();
 
+    public Urlencoded(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     /**
      * 
      * (Required)
