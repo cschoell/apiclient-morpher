@@ -95,6 +95,7 @@
 
     <modules>
         <module>apiclient-morpher-api</module>
+        <module>apiclient-morpher-springcontext</module>
         <module>generic-model</module>
         <module>bruno-model</module>
         <module>postman-model</module>
