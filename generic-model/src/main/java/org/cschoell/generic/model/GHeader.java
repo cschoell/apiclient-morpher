@@ -1,11 +1,14 @@
 package org.cschoell.generic.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 public class GHeader extends GenericKeyValueBase {
+
+    public GHeader(String key, String value) {
+        super(key, value);
+    }
 }

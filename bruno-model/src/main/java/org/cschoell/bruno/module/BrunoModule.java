@@ -1,16 +1,18 @@
 package org.cschoell.bruno.module;
 
 import org.cschoell.apiclient.converter.api.*;
+import org.cschoell.bruno.mapper.BrunoToGenericCollectionMapper;
+import org.cschoell.bruno.mapper.GenericToBrunoCollectionMapper;
 import org.cschoell.bruno.model.BrunoCollection;
 import org.cschoell.bruno.module.reader.BrunoConfigurationModelReader;
 import org.cschoell.bruno.module.writer.BrunoConfigurationModelWriter;
-import org.cschoell.bruno.mapper.GenericToBrunoCollectionMapper;
+import org.cschoell.generic.model.GCollection;
 import org.cschoell.generic.module.GenericConfigurationModel;
 
 public class BrunoModule implements ConverterModule<BrunoConfigurationModel, GenericConfigurationModel> {
 
     private GenericToBrunoCollectionMapper genericToBrunoCollectionMapper = GenericToBrunoCollectionMapper.INSTANCE;
-//    private BrunoCollectionToGenericMapper brunoCollectionToGenericMapper = BrunoCollectionToGenericMapper.INSTANCE;
+    private BrunoToGenericCollectionMapper brunoCollectionToGenericMapper = BrunoToGenericCollectionMapper.INSTANCE;
 
     public BrunoModule() {
     }
@@ -40,10 +42,8 @@ public class BrunoModule implements ConverterModule<BrunoConfigurationModel, Gen
         return new ModelMapper<>() {
             @Override
             public GenericConfigurationModel map(BrunoConfigurationModel src) {
-//                    BrunoCollection target = genericToBrunoCollectionMapper.toBrunoCollection(from);
-//                    return new BrunoConfigurationModel(target);
-                throw new UnsupportedOperationException("Bruno to generic not implemented yet");
-
+                GCollection target = brunoCollectionToGenericMapper.toGenericCollection(src.getContent());
+                return new GenericConfigurationModel(target);
             }
 
             @Override

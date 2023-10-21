@@ -4,7 +4,6 @@ import org.cschoell.bruno.model.Auth;
 import org.cschoell.bruno.model.Query;
 import org.cschoell.bruno.model.*;
 import org.cschoell.generic.model.*;
-import org.cschoell.generic.model.body.GKeyValueBody;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -17,6 +16,7 @@ public interface GenericToBrunoCollectionMapper {
     GenericToBrunoCollectionMapper INSTANCE = Mappers.getMapper(GenericToBrunoCollectionMapper.class);
 
     @Mapping(target = "meta.seq", source = "info.version.minor")
+    @Mapping(target = "meta.type", constant = "http")
     BrunoCollection toBrunoCollection(GCollection in);
 
     @Mapping(target = "xmlBody", source = "body.text", conditionExpression = "java(request.getBody().getContentType() == GBodyContentType.xml)")
@@ -40,7 +40,7 @@ public interface GenericToBrunoCollectionMapper {
         System.out.println(to);
     }
 
-    default FormBody map(Map<String, GValue> value) {
+    default FormBody toFormBody(Map<String, GValue> value) {
         if(value == null || value.isEmpty()) return null;
         FormBody formBody = new FormBody();
         value.forEach((s, value1) -> formBody.put(s, value1.getValue()));
@@ -60,11 +60,7 @@ public interface GenericToBrunoCollectionMapper {
             case BEARER -> AuthType.bearer;
             default -> AuthType.none;
         };
-
     }
-
-
-
 
     @Mapping(target = "value", source = "value")
     @Mapping(target = "bodyType", constant = "text")

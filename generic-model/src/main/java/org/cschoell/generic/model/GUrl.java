@@ -1,15 +1,17 @@
 package org.cschoell.generic.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class GUrl extends GenericModelBase {
 
     private String raw;
+
+
 
 
 }

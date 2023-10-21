@@ -55,6 +55,7 @@ public interface GenericCollectionToPostmanMapper {
     @Mapping(target = "basic", source = "authAttributes", conditionExpression = "java(gAuth.getAuthType() == GAuth.Type.BASIC)")
     @Mapping(target = "awsv4", source = "authAttributes", conditionExpression = "java(gAuth.getAuthType() == GAuth.Type.AWSV_4)")
     @Mapping(target = "apikey", ignore = true)
+    @Mapping(target = "type", source = "authType")
     Auth toAuth(GAuth gAuth);
 
     @Named("item")
@@ -74,9 +75,9 @@ public interface GenericCollectionToPostmanMapper {
 
     default List<Event> toEventList(GRequest request) {
         List<Event> events = new ArrayList<>();
-        events.add(toEvent(request.getTests(), "test"));
-        events.add(toEvent(request.getPostResponseScript(), "postresponse"));
-        events.add(toEvent(request.getPreRequestScript(), "prerequest"));
+        if (request.getTests() != null) events.add(toEvent(request.getTests(), "test"));
+        if (request.getPostResponseScript() != null) events.add(toEvent(request.getPostResponseScript(), "postresponse"));
+        if (request.getPreRequestScript() != null) events.add(toEvent(request.getPreRequestScript(), "prerequest"));
         return events;
     }
 
@@ -103,7 +104,6 @@ public interface GenericCollectionToPostmanMapper {
                     null,
                     Collections.emptyList(),
                     new HashMap<>()
-
             );
         } catch (MalformedURLException e) {
             final Url url = new Url();
@@ -138,6 +138,7 @@ public interface GenericCollectionToPostmanMapper {
     }
 
     default Body.Mode toBodyMode(GBodyContentType contentType) {
+        if (contentType == null) return null;
         Body.Mode mode = switch (contentType) {
             case none -> null;
             case json -> Body.Mode.RAW;

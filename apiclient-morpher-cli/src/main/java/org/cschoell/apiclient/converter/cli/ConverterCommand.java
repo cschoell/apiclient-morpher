@@ -11,13 +11,13 @@ import java.util.concurrent.Callable;
 @CommandLine.Command(mixinStandardHelpOptions = true)
 public class ConverterCommand implements Callable<String> {
 
-    @CommandLine.Option(names = {"-s", "--source"}, paramLabel = "SOURCE", description = "source file or directory to map from", required = true)
+    @CommandLine.Option(names = {"-s", "--source"}, paramLabel = "SOURCE", description = "source file or directory to toFormBody from", required = true)
     private File source;
 
     @CommandLine.Option(names = {"-st", "--sourceType"}, paramLabel = "SOURCE_TYPE", description = "type of the configuration that the model is read from (defaults to postman)")
     private String sourceClient = ApiConfigurationType.postman.getType();
 
-    @CommandLine.Option(names = {"-t", "--target"}, paramLabel = "TARGET", description = "target file or directory to map to", required = true)
+    @CommandLine.Option(names = {"-t", "--target"}, paramLabel = "TARGET", description = "target file or directory to toFormBody to", required = true)
     private File target;
 
     @CommandLine.Option(names = {"-tt", "--targetType"}, paramLabel = "TARGET_TYPE", description = "type of the configuration that the model is written to (defaults to bruno)")
