@@ -152,10 +152,12 @@ public interface GenericCollectionToPostmanMapper {
 
 
     default List<Urlencoded> mapListToUrlEncoded(GKeyValueBody value) {
+        if (value == null) return Collections.emptyList();
         return value.getKeyValueBody().entrySet().stream().map(this::toUrlencoded).collect(Collectors.toList());
     }
 
     default List<Formdatum> mapListToFormdata(GKeyValueBody value) {
+        if (value == null) return Collections.emptyList();
         return value.getKeyValueBody().entrySet().stream().map(this::toFormData).collect(Collectors.toList());
     }
 

@@ -1,19 +1,18 @@
-package org.cschoell.postman.module;
+package org.cschoell.generic.module;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.cschoell.apiclient.converter.api.ApiConfigurationType;
 import org.cschoell.apiclient.converter.api.ModelWriter;
-import org.cschoell.postman.module.schematoobject.PostmanObjectMapperBuilder;
 
 import java.io.File;
 import java.io.IOException;
 
-public class PostmanModelWriter implements ModelWriter<PostmanConfigurationModel> {
-    private final JsonMapper mapper = new PostmanObjectMapperBuilder().build();
+public class GenericModuleWriter implements ModelWriter<GenericConfigurationModel> {
+    private static JsonMapper mapper = new GenericObjectMapperBuilder().build();
+
 
     @Override
-    public void writeModel(PostmanConfigurationModel model, File target) {
+    public void writeModel(GenericConfigurationModel model, File target) {
         try {
             mapper.writeValue(target, model.getContent());
         } catch (IOException e) {
@@ -23,6 +22,6 @@ public class PostmanModelWriter implements ModelWriter<PostmanConfigurationModel
 
     @Override
     public ApiConfigurationType getType() {
-        return ApiConfigurationType.postman;
+        return ApiConfigurationType.generic;
     }
 }

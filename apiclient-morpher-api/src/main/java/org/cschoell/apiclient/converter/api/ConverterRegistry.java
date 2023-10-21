@@ -19,6 +19,8 @@ public class ConverterRegistry {
     public void registerModule(ConverterModule module) {
         writers.put(module.getWriter().getType(), module.getWriter());
         readers.put(module.getReader().getType(), module.getReader());
+        final ConverterTuple tuple = new ConverterTuple(module.getSourceType(), module.getTargetType());
+        registerMapper(tuple, module.getMapper());
     }
     public ModelReader<?> getReader(ApiConfigurationType type) {
         return readers.get(type);

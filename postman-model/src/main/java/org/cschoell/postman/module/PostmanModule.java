@@ -1,12 +1,14 @@
 package org.cschoell.postman.module;
 
 import org.cschoell.apiclient.converter.api.*;
+import org.cschoell.generic.module.GenericConfigurationModel;
+import org.cschoell.postman.mapper.GenericCollectionToPostmanMapper;
 import org.cschoell.postman.mapper.PostmanToGenericCollectionMapper;
-import org.cschoell.generic.model.GCollection;
 
-public class PostmanModule implements ConverterModule<PostmanConfigurationModel> {
+public class PostmanModule implements ConverterModule<PostmanConfigurationModel, GenericConfigurationModel> {
 
     private PostmanToGenericCollectionMapper postmanToGenericCollectionMapper = PostmanToGenericCollectionMapper.INSTANCE;
+    private GenericCollectionToPostmanMapper genericCollectionToPostmanMapper = GenericCollectionToPostmanMapper.INSTANCE;
 //    private BrunoCollectionToGenericMapper brunoCollectionToGenericMapper = BrunoCollectionToGenericMapper.INSTANCE;
 
     public PostmanModule() {
@@ -23,21 +25,26 @@ public class PostmanModule implements ConverterModule<PostmanConfigurationModel>
     }
 
     @Override
-    public ApiConfigurationType getType() {
-        return ApiConfigurationType.bruno;
+    public ApiConfigurationType getTargetType() {
+        return ApiConfigurationType.generic;
     }
 
     @Override
-    public ModelMapper<PostmanConfigurationModel> getMapper() {
+    public ApiConfigurationType getSourceType() {
+        return ApiConfigurationType.postman;
+    }
+
+    @Override
+    public ModelMapper<PostmanConfigurationModel, GenericConfigurationModel> getMapper() {
         return new ModelMapper<>() {
             @Override
-            public GCollection mapToGeneric(PostmanConfigurationModel from) {
-                return postmanToGenericCollectionMapper.toGenericCollection(from.getContent());
+            public GenericConfigurationModel map(PostmanConfigurationModel src) {
+                return new GenericConfigurationModel(postmanToGenericCollectionMapper.toGenericCollection(src.getContent()));
             }
 
             @Override
-            public PostmanConfigurationModel mapFromGeneric(GCollection from) {
-                throw new UnsupportedOperationException("Generic to postman not implemented yet");
+            public PostmanConfigurationModel mapReverse(GenericConfigurationModel target) {
+                return new PostmanConfigurationModel(genericCollectionToPostmanMapper.toPostmanCollection(target.getContent()));
             }
         };
     }
