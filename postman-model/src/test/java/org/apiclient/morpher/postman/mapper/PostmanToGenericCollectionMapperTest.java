@@ -5,10 +5,13 @@ import org.apiclient.morpher.generic.model.GCollection;
 import org.apiclient.morpher.postman.model.PostmanCollection;
 import org.apiclient.morpher.postman.module.schematoobject.PostmanObjectMapperBuilder;
 import org.apiclient.morpher.postman.testsupport.TestCollectionProvider;
+import org.apiclient.morpher.properties.PropertyAccessReport;
+import org.apiclient.morpher.properties.PropertyAccessDescription;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.SortedSet;
 
 class PostmanToGenericCollectionMapperTest {
 
@@ -19,14 +22,18 @@ class PostmanToGenericCollectionMapperTest {
     GenericCollectionToPostmanMapper reverseMapper = GenericCollectionToPostmanMapper.INSTANCE;
 
 
-
     @Test
     void allmappedCorrectly() throws IOException {
         final PostmanCollection postmanCollection = new SourcePostmanCollection().generateCollection();
-
         final GCollection genericCollection = mapper.toGenericCollection(postmanCollection);
-
         final PostmanCollection afterMapping = reverseMapper.toPostmanCollection(genericCollection);
+
+        PropertyAccessReport propertyAccessReport = PropertyAccessReport.getInstance();
+        final SortedSet<PropertyAccessDescription> convertedToPropertyDescriptions = propertyAccessReport.getConvertedToPropertyDescriptions();
+//        propertyAccessReport.getPropertiesAccessed().forEach(System.out::println);
+
+
+        convertedToPropertyDescriptions.forEach(System.out::println);
 
 //        assertThat(postmanCollection).isEqualTo(afterMapping);
 

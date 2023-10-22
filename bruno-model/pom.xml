@@ -19,11 +19,6 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.cs.apiclient.morpher</groupId>
             <artifactId>apiclient-morpher-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
