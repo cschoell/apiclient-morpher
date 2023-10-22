@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.cschoell.apiclient.converter</groupId>
+        <groupId>org.cs.apiclient.morpher</groupId>
         <artifactId>apiclient-morpher-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -24,12 +24,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.cschoell.apiclient.converter</groupId>
+            <groupId>org.cs.apiclient.morpher</groupId>
             <artifactId>apiclient-morpher-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.cschoell.apiclient.converter</groupId>
+            <groupId>org.cs.apiclient.morpher</groupId>
             <artifactId>generic-model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

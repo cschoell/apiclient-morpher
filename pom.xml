@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.cschoell.apiclient.converter</groupId>
+    <groupId>org.cs.apiclient.morpher</groupId>
     <artifactId>apiclient-morpher-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>postman-converter</name>
