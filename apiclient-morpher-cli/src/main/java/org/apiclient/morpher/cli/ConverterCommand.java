@@ -1,7 +1,7 @@
-package org.apiclient.morpher.apiclient.converter.cli;
+package org.apiclient.morpher.cli;
 
 import org.apiclient.morpher.api.*;
-import org.apiclient.morpher.apiclient.context.SpringContextConfiguration;
+import org.apiclient.morpher.context.SpringContextConfiguration;
 import picocli.CommandLine;
 
 import java.io.File;

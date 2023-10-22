@@ -1,4 +1,4 @@
-package org.apiclient.morpher.postman.converter.postmanconverter;
+package org.apiclient.morpher.postmanconverter;
 
 import org.apiclient.morpher.bruno.mapper.GenericToBrunoCollectionMapper;
 import org.apiclient.morpher.bruno.module.BrunoConfigurationModel;

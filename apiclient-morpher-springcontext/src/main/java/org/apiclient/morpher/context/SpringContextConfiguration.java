@@ -1,4 +1,4 @@
-package org.apiclient.morpher.apiclient.context;
+package org.apiclient.morpher.context;
 
 import org.apiclient.morpher.api.ConverterModule;
 import org.apiclient.morpher.api.ConverterRegistry;

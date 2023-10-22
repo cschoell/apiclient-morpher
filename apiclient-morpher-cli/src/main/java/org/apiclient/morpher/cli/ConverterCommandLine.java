@@ -1,4 +1,4 @@
-package org.apiclient.morpher.apiclient.converter.cli;
+package org.apiclient.morpher.cli;
 
 import picocli.CommandLine;
 
