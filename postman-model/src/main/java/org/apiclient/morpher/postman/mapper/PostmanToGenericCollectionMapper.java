@@ -108,6 +108,20 @@ public interface PostmanToGenericCollectionMapper {
     @Mapping(target = "type", ignore = true)
     GValue toValue(Formdatum source);
 
+
+    @Mapping(target = "filePath", source = "src")
+    GFile fileToGFile(File file);
+
+    @Mapping(target = "type", ignore = true)
+    @Mapping(target = "filePath", source = "src")
+    @Mapping(target = "description", ignore = true)
+    GFile certToGfile(Cert from);
+
+    @Mapping(target = "type", ignore = true)
+    @Mapping(target = "filePath", source = "src")
+    @Mapping(target = "description", ignore = true)
+    GFile keyToGfile(Key from);
+
     @AfterMapping
     default void afterToRequestFile(@MappingTarget GRequest request, Item item) {
         handleEvents(request, item);
@@ -189,6 +203,7 @@ public interface PostmanToGenericCollectionMapper {
     }
 
     List<GAuthAttribute> toAuthAttributes(List<AuthAttribute> apikey);
+
 
 
     @Named("language")

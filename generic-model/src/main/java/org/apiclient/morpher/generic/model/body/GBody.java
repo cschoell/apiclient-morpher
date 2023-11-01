@@ -21,6 +21,8 @@ public class GBody extends GenericModelBase {
     GGraphql graphql;
     GFile file;
 
+    String src;
+
 
 
 }

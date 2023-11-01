@@ -10,4 +10,5 @@ import lombok.ToString;
 public class GFile extends GenericModelBase{
 
     private String filePath;
+    private String content;
 }

@@ -63,6 +63,14 @@ public interface GenericCollectionToPostmanMapper {
         return value.stream().map(this::toItem).collect(Collectors.toList());
     }
 
+
+
+    @Mapping(target = "src", source = "filePath")
+    Cert gfileToCert(GFile from);
+
+    @Mapping(target = "src", source = "filePath")
+    Key gfileToKey(GFile from);
+
     @Mapping(target = "event", source = ".")
     @Mapping(target = "request", source = ".")
     @Named("item")
@@ -86,6 +94,9 @@ public interface GenericCollectionToPostmanMapper {
     @Mapping(target = "script.type", source = "from.contentType")
     @Mapping(target = "script.exec", source = "from.exec")
     Event toEvent(GScript from, String listen);
+
+    @Mapping(target = "src", source = "filePath")
+    File toFile(GFile from);
 
 
     default List<String> toLines(String from) {
@@ -135,6 +146,7 @@ public interface GenericCollectionToPostmanMapper {
 
     @AfterMapping
     default void afterToBody(@MappingTarget Body to, GBody from) {
+
     }
 
     default Body.Mode toBodyMode(GBodyContentType contentType) {
@@ -169,10 +181,21 @@ public interface GenericCollectionToPostmanMapper {
     Urlencoded toUrlencoded(Map.Entry<String, GValue> entry);
 
 
-    @Mapping(target = "contentType", ignore = true)
+    @Mapping(target = "type", ignore = true)
+    @Mapping(target = "src", source = "value.src")
+    @Mapping(target = "contentType", source = "value.contentType")
     @Mapping(target = "description", source = "value.description")
     @Mapping(target = "disabled", source = "value.disabled")
     @Mapping(target = "additionalProperties", source = "value.additionalProperties")
     @Mapping(target = "value", source = "value.value")
     Formdatum toFormData(Map.Entry<String, GValue> entry);
+
+    @AfterMapping
+    default void afterToFormdatum(@MappingTarget Formdatum to){
+        if (StringUtils.isNotBlank(to.getSrc())) {
+            to.setType(Formdatum.Type.FILE);
+        } else {
+            to.setType(Formdatum.Type.TEXT);
+        }
+    }
 }

@@ -14,6 +14,8 @@ import lombok.ToString;
 public class GValue extends GenericModelBase {
     private boolean disabled;
     private String value;
+    private String contentType;
+    private String src;
 
     public GValue(String value) {
         this.value = value;
