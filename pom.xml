@@ -22,7 +22,7 @@
         <picocli.version>4.7.6</picocli.version>
         <jsonschema2pojo-core.version>1.2.1</jsonschema2pojo-core.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <commons-beanutils.version>1.11.0</commons-beanutils.version>
     </properties>
 
     <dependencies>
