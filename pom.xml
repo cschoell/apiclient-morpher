@@ -17,7 +17,7 @@
     <description>Parent for the Tool to convert postman collections into different formats (e.g. Bruno)</description>
     <properties>
         <java.version>17</java.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <commons-io.version>2.16.1</commons-io.version>
         <picocli.version>4.7.6</picocli.version>
         <commons-collections4.version>4.5.0</commons-collections4.version>
