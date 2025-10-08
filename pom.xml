@@ -20,8 +20,8 @@
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <commons-io.version>2.16.1</commons-io.version>
         <picocli.version>4.7.6</picocli.version>
+        <commons-collections4.version>4.5.0</commons-collections4.version>
         <jsonschema2pojo-core.version>1.2.2</jsonschema2pojo-core.version>
-        <commons-collections4.version>4.4</commons-collections4.version>
         <commons-beanutils.version>1.11.0</commons-beanutils.version>
     </properties>
 
